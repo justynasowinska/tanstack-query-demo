@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { useScan } from 'react-scan'
 import { AccordionSection } from '../components/AccordionSection'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
@@ -16,10 +15,6 @@ function UserProfileQueryContent({
   queryKey,
   shouldFail,
 }: UserProfileQueryContentProps) {
-  useScan({
-    enabled: true,
-  })
-
   const { data } = useQuery(userProfileQueryOptions({ queryKey, shouldFail }))
 
   return (
