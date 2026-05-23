@@ -8,6 +8,8 @@ import { SelectorLimitsRerendersExample } from './examples/03_selectorLimitsRere
 import { IsFetchingSubscriptionRerenderExample } from './examples/04_isFetchingSubscriptionRerenderExample'
 import { HookOverSubscriptionRerenderExample } from './examples/05_hookOverSubscriptionRerenderExample'
 import { SelectorWithOverSubscribedHookExample } from './examples/06_selectorWithOverSubscribedHookExample'
+import { EnabledExample } from './examples/07_enabledAndStaleTimeExample'
+import { StaleTimeExample } from './examples/08_staleTimeExample'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <IsFetchingSubscriptionRerenderExample />
       <HookOverSubscriptionRerenderExample />
       <SelectorWithOverSubscribedHookExample />
+      <EnabledExample />
+      <StaleTimeExample />
     </PageShell>
   )
 }
