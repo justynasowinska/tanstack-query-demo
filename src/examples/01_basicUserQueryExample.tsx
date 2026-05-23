@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { AccordionSection } from '../components/AccordionSection'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
+import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
 const DEMO_QUERY_KEY = ['01-demo']
@@ -11,9 +12,10 @@ type UserProfileQueryContentProps = {
 
 function UserProfileQueryContent({ queryKey }: UserProfileQueryContentProps) {
   const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName}</p>

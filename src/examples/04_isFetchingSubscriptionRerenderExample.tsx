@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
+import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
 const IS_FETCHING_QUERY_KEY = ['04-is-fetching-subscription']
@@ -12,9 +13,10 @@ type PanelQueryContentProps = {
 
 function PanelDataOnly({ queryKey }: PanelQueryContentProps) {
   const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName}</p>
@@ -25,12 +27,13 @@ function PanelDataOnly({ queryKey }: PanelQueryContentProps) {
 
 function PanelDataAndIsFetching({ queryKey }: PanelQueryContentProps) {
   const { data, isFetching } = useQuery(userProfileQueryOptions({ queryKey }))
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   // Keep isFetching subscription active, but do not render it in UI.
   void isFetching
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName}</p>

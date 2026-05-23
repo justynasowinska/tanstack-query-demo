@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
+import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
 const HOOK_OVER_SUBSCRIPTION_QUERY_KEY = ['05-hook-over-subscription-rerender']
@@ -21,9 +22,10 @@ function useUserProfileWithStatus(queryKey: string[]) {
 
 function PanelDataOnlyFromHook({ queryKey }: PanelQueryContentProps) {
   const { data } = useUserProfileWithStatus(queryKey)
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName}</p>
@@ -34,9 +36,10 @@ function PanelDataOnlyFromHook({ queryKey }: PanelQueryContentProps) {
 
 function PanelDataAndIsFetchingFromHook({ queryKey }: PanelQueryContentProps) {
   const { data, isFetching } = useUserProfileWithStatus(queryKey)
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName}</p>

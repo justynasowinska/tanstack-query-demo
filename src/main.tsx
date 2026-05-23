@@ -1,13 +1,2 @@
-async function startApp() {
-  if (import.meta.env.DEV) {
-    const { scan } = await import('react-scan')
+import './bootstrapApp';
 
-    scan({
-      enabled: true,
-    })
-  }
-
-  await import('./bootstrapApp')
-}
-
-void startApp()

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
+import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
 const SELECTOR_QUERY_KEY = ['03-selector-limits-rerenders']
@@ -12,9 +13,10 @@ type PanelQueryContentProps = {
 
 function PanelWithoutSelector({ queryKey }: PanelQueryContentProps) {
   const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName}</p>
@@ -28,9 +30,10 @@ function PanelWithSelector({ queryKey }: PanelQueryContentProps) {
     ...userProfileQueryOptions({ queryKey }),
     select: (data) => data.firstName,
   })
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <div className="query-state-panel-wrapper">
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {firstName}</p>
