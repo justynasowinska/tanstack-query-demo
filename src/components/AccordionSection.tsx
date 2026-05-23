@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion'
 import { useState, type ReactNode } from 'react'
 
 type ExampleAccordionSectionProps = {
@@ -30,35 +29,23 @@ export function AccordionSection({
       >
         <span className="accordion-trigger-header">
           <span className="accordion-title">{title}</span>
-          <motion.span
-            className="accordion-chevron"
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            aria-hidden
-          >
+          <span className="accordion-chevron" aria-hidden>
             ▾
-          </motion.span>
+          </span>
         </span>
         <span className="accordion-description">{description}</span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            id={`panel-${id}`}
-            role="region"
-            aria-labelledby={`trigger-${id}`}
-            className="accordion-panel"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.24, ease: 'easeOut' }}
-          >
-            <div className="accordion-panel-content">{children}</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div
+          id={`panel-${id}`}
+          role="region"
+          aria-labelledby={`trigger-${id}`}
+          className="accordion-panel"
+        >
+          <div className="accordion-panel-content">{children}</div>
+        </div>
+      )}
     </article>
   )
 }
