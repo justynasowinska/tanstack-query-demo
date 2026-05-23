@@ -51,11 +51,8 @@ export function SharedCacheBetweenComponentsExample() {
           queryKey={SHARED_QUERY_KEY}
           title="Panel A"
           description={
-            <>
-              <span>queryKey: ['02-shared-cache']</span>
-              <br />
-              <span>const {'{ data }'} = useQuery(...)</span>
-            </>
+            <pre className="query-tools-code-block">{`queryKey: ['02-shared-cache']
+const { data } = useQuery(...)`}</pre>
           }
         >
           <PanelAQueryContent queryKey={SHARED_QUERY_KEY} />
@@ -65,11 +62,8 @@ export function SharedCacheBetweenComponentsExample() {
           queryKey={SHARED_QUERY_KEY}
           title="Panel B"
           description={
-            <>
-              <span>queryKey: ['02-shared-cache']</span>
-              <br />
-              <span>const {'{ data }'} = useQuery(...)</span>
-            </>
+            <pre className="query-tools-code-block">{`queryKey: ['02-shared-cache']
+const { data } = useQuery(...)`}</pre>
           }
         >
           <PanelBQueryContent queryKey={SHARED_QUERY_KEY} />

@@ -200,6 +200,7 @@
   display: grid;
   gap: 14px;
   grid-template-columns: 1fr;
+  align-items: stretch;
 }
 
 @media (min-width: 880px) {
@@ -209,8 +210,10 @@
 }
 
 .query-tools-card {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
+  height: 100%;
 }
 
 .query-tools-header {
@@ -229,6 +232,21 @@
   margin: 0;
   font-size: 13px;
   color: var(--text);
+}
+
+.query-tools-footer {
+  margin-top: auto;
+  display: grid;
+  gap: 14px;
+}
+
+.query-tools-code-block {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre;
 }
 
 .query-tools-layout {

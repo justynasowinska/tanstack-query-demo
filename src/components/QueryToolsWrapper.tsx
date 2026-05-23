@@ -32,15 +32,17 @@ export function QueryToolsWrapper({
         {(title || description) && (
           <div className="query-tools-header">
             {title && <p className="query-tools-title">{title}</p>}
-            {description && <p className="query-tools-description">{description}</p>}
+            {description && <div className="query-tools-description">{description}</div>}
           </div>
         )}
 
-        <DemoQueryToolbar
-          onRefetch={handleRefetch}
-          onRemount={handleRemount}
-        />
-        <div key={remountKey}>{children}</div>
+        <div className="query-tools-footer">
+          <DemoQueryToolbar
+            onRefetch={handleRefetch}
+            onRemount={handleRemount}
+          />
+          <div key={remountKey}>{children}</div>
+        </div>
       </section>
     </div>
   )

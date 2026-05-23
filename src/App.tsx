@@ -4,6 +4,7 @@ import { GlobalQueryOptionsToolbar } from './components/GlobalQueryOptionsToolba
 import { PageShell } from './components/PageShell'
 import { BasicUserQueryExample } from './examples/01_basicUserQueryExample'
 import { SharedCacheBetweenComponentsExample } from './examples/02_sharedCacheBetweenComponentsExample'
+import { SelectorLimitsRerendersExample } from './examples/03_selectorLimitsRerendersExample'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <GlobalFetchDemoUserStatsPanel />
       <BasicUserQueryExample />
       <SharedCacheBetweenComponentsExample />
+      <SelectorLimitsRerendersExample />
     </PageShell>
   )
 }
