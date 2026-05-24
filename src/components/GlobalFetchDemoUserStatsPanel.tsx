@@ -1,14 +1,21 @@
 import { useSyncExternalStore } from 'react'
 import {
     getFetchDemoUserCallCount,
+    getFetchDemoUserShouldFail,
     resetFetchDemoUserCallCount,
+    setFetchDemoUserShouldFail,
     subscribeFetchDemoUserCallCount,
+    subscribeFetchDemoUserShouldFail,
 } from '../api/mockApi'
 
 export function GlobalFetchDemoUserStatsPanel() {
   const fetchDemoUserCallCount = useSyncExternalStore(
     subscribeFetchDemoUserCallCount,
     getFetchDemoUserCallCount,
+  )
+  const fetchDemoUserShouldFail = useSyncExternalStore(
+    subscribeFetchDemoUserShouldFail,
+    getFetchDemoUserShouldFail,
   )
 
   return (
@@ -23,9 +30,19 @@ export function GlobalFetchDemoUserStatsPanel() {
           Reset counter
         </button>
       </div>
-      <p className="global-fetch-stats-value">
-        fetchDemoUser calls: {fetchDemoUserCallCount}
-      </p>
+      <div className="global-fetch-stats-row">
+        <p className="global-fetch-stats-value">fetchDemoUser</p>
+        <p className="global-fetch-stats-value">calls: {fetchDemoUserCallCount}</p>
+        <label className="global-fetch-stats-toggle" htmlFor="fetch-demo-user-force-error">
+          <input
+            id="fetch-demo-user-force-error"
+            type="checkbox"
+            checked={fetchDemoUserShouldFail}
+            onChange={(event) => setFetchDemoUserShouldFail(event.target.checked)}
+          />
+          Force error
+        </label>
+      </div>
     </section>
   )
 }

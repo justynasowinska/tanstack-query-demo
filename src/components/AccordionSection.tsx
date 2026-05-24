@@ -13,7 +13,7 @@ export function AccordionSection({
   id,
   title,
   description,
-  defaultOpen = true,
+  defaultOpen = false,
   children,
 }: ExampleAccordionSectionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen)

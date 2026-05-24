@@ -11,7 +11,9 @@ export type DemoUser = {
 
 const DEFAULT_MOCK_API_DELAY_MS = 2000
 let fetchDemoUserCallCount = 0
+let fetchDemoUserShouldFail = false
 const fetchDemoUserCallCountSubscribers = new Set<() => void>()
+const fetchDemoUserShouldFailSubscribers = new Set<() => void>()
 
 const wait = (delayMs: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, delayMs))
@@ -37,6 +39,23 @@ export function subscribeFetchDemoUserCallCount(onStoreChange: () => void) {
 
   return () => {
     fetchDemoUserCallCountSubscribers.delete(onStoreChange)
+  }
+}
+
+export function getFetchDemoUserShouldFail() {
+  return fetchDemoUserShouldFail
+}
+
+export function setFetchDemoUserShouldFail(value: boolean) {
+  fetchDemoUserShouldFail = value
+  fetchDemoUserShouldFailSubscribers.forEach((notify) => notify())
+}
+
+export function subscribeFetchDemoUserShouldFail(onStoreChange: () => void) {
+  fetchDemoUserShouldFailSubscribers.add(onStoreChange)
+
+  return () => {
+    fetchDemoUserShouldFailSubscribers.delete(onStoreChange)
   }
 }
 
@@ -72,6 +91,9 @@ export async function fetchDemoUser(
       firstName: 'Demo',
       changingValue: Math.random(),
     }),
-    options,
+    {
+      ...options,
+      shouldFail: options?.shouldFail ?? fetchDemoUserShouldFail,
+    },
   )
 }

@@ -105,6 +105,20 @@
   font-weight: 600;
 }
 
+.global-fetch-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.global-fetch-stats-toggle {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+
 .global-fetch-stats-reset-button {
   margin-left: auto;
   border: 1px solid var(--border);
@@ -197,6 +211,24 @@
 .query-tools-card {
   display: grid;
   gap: 14px;
+}
+
+.query-tools-header {
+  display: grid;
+  gap: 4px;
+}
+
+.query-tools-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.query-tools-description {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text);
 }
 
 .query-tools-layout {

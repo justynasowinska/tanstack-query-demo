@@ -4,15 +4,15 @@ import { DemoQueryToolbar } from './DemoQueryToolbar'
 
 type QueryToolsWrapperProps = {
   queryKey: string[]
-  shouldFail: boolean
-  onShouldFailChange: (value: boolean) => void
+  title?: string
+  description?: React.ReactNode
   children: React.ReactNode
 }
 
 export function QueryToolsWrapper({
   queryKey,
-  shouldFail,
-  onShouldFailChange,
+  title,
+  description,
   children,
 }: QueryToolsWrapperProps) {
   const queryClient = useQueryClient()
@@ -29,11 +29,16 @@ export function QueryToolsWrapper({
   return (
     <div className="query-tools-layout">
       <section className="query-tools-card">
+        {(title || description) && (
+          <div className="query-tools-header">
+            {title && <p className="query-tools-title">{title}</p>}
+            {description && <p className="query-tools-description">{description}</p>}
+          </div>
+        )}
+
         <DemoQueryToolbar
           onRefetch={handleRefetch}
           onRemount={handleRemount}
-          shouldFail={shouldFail}
-          onShouldFailChange={onShouldFailChange}
         />
         <div key={remountKey}>{children}</div>
       </section>

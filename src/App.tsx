@@ -3,6 +3,7 @@ import { GlobalFetchDemoUserStatsPanel } from './components/GlobalFetchDemoUserS
 import { GlobalQueryOptionsToolbar } from './components/GlobalQueryOptionsToolbar'
 import { PageShell } from './components/PageShell'
 import { BasicUserQueryExample } from './examples/01_basicUserQueryExample'
+import { SharedCacheBetweenComponentsExample } from './examples/02_sharedCacheBetweenComponentsExample'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <GlobalQueryOptionsToolbar />
       <GlobalFetchDemoUserStatsPanel />
       <BasicUserQueryExample />
+      <SharedCacheBetweenComponentsExample />
     </PageShell>
   )
 }
