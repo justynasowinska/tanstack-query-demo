@@ -7,6 +7,7 @@ type QueryToolsWrapperProps = {
   title?: string
   description?: React.ReactNode
   onRefetch?: () => void
+  localControls?: React.ReactNode
   children: React.ReactNode
 }
 
@@ -15,6 +16,7 @@ export function QueryToolsWrapper({
   title,
   description,
   onRefetch,
+  localControls,
   children,
 }: QueryToolsWrapperProps) {
   const queryClient = useQueryClient()
@@ -48,6 +50,9 @@ export function QueryToolsWrapper({
             onRefetch={handleRefetch}
             onRemount={handleRemount}
           />
+          {localControls && (
+            <div className="query-tools-local-controls">{localControls}</div>
+          )}
           <div key={remountKey}>{children}</div>
         </div>
       </section>

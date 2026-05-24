@@ -10,6 +10,7 @@ import { HookOverSubscriptionRerenderExample } from './examples/05_hookOverSubsc
 import { SelectorWithOverSubscribedHookExample } from './examples/06_selectorWithOverSubscribedHookExample'
 import { EnabledExample } from './examples/07_enabledAndStaleTimeExample'
 import { StaleTimeExample } from './examples/08_staleTimeExample'
+import { SubscribedFocusExample } from './examples/09_subscribedFocusExample'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <SelectorWithOverSubscribedHookExample />
       <EnabledExample />
       <StaleTimeExample />
+      <SubscribedFocusExample />
     </PageShell>
   )
 }

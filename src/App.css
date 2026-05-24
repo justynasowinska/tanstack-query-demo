@@ -245,6 +245,13 @@
   gap: 14px;
 }
 
+.query-tools-local-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
 .query-tools-code-block {
   margin: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
@@ -335,6 +342,18 @@
 }
 
 .query-state-panel p {
+  margin: 0;
+}
+
+.panel-inline-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.panel-inline-toggle input {
   margin: 0;
 }
 
