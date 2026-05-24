@@ -7,8 +7,7 @@ async function startApp() {
     })
   }
 
-  const { bootstrapApp } = await import('./bootstrapApp')
-  bootstrapApp()
+  await import('./bootstrapApp')
 }
 
 void startApp()
