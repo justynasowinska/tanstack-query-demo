@@ -7,6 +7,7 @@ import { SharedCacheBetweenComponentsExample } from './examples/02_sharedCacheBe
 import { SelectorLimitsRerendersExample } from './examples/03_selectorLimitsRerendersExample'
 import { IsFetchingSubscriptionRerenderExample } from './examples/04_isFetchingSubscriptionRerenderExample'
 import { HookOverSubscriptionRerenderExample } from './examples/05_hookOverSubscriptionRerenderExample'
+import { SelectorWithOverSubscribedHookExample } from './examples/06_selectorWithOverSubscribedHookExample'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <SelectorLimitsRerendersExample />
       <IsFetchingSubscriptionRerenderExample />
       <HookOverSubscriptionRerenderExample />
+      <SelectorWithOverSubscribedHookExample />
     </PageShell>
   )
 }
