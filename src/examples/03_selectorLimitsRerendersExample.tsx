@@ -44,12 +44,12 @@ export function SelectorLimitsRerendersExample() {
     <AccordionSection
       id="03_selector-limits-rerenders"
       title="03 Selector Limits Rerenders"
-      description="Both panels share queryKey ['03-selector-limits-rerenders']. Left subscribes to full data object via const { data } = useQuery(...), so it rerenders on each fetch because random changingValue updates the object. Right uses select to subscribe only to firstName, so it avoids rerenders when firstName stays the same."
+      description="Both panels share queryKey ['03-selector-limits-rerenders'] and the same cache entry. Panel A subscribes to the full query data object via const { data } = useQuery(...), so data updates (including changingValue) can trigger rerenders. Panel B uses select to subscribe to firstName only, so data-driven rerenders are limited when firstName remains unchanged."
     >
       <PanelsRow>
         <QueryToolsWrapper
           queryKey={SELECTOR_QUERY_KEY}
-          title="Panel A (without select)"
+          title="Panel A (full data subscription)"
           description={
             <pre className="query-tools-code-block">{`queryKey: ['03-selector-limits-rerenders']
 const { data } = useQuery(...)`}</pre>
@@ -60,7 +60,7 @@ const { data } = useQuery(...)`}</pre>
 
         <QueryToolsWrapper
           queryKey={SELECTOR_QUERY_KEY}
-          title="Panel B (with select)"
+          title="Panel B (selected firstName)"
           description={
             <pre className="query-tools-code-block">{`const { data: firstName } = useQuery({
   ...userProfileQueryOptions({ queryKey }),
