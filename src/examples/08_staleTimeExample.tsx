@@ -5,8 +5,8 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
-const STALE_TIME_ZERO_QUERY_KEY = ['08-stale-time-zero']
-const STALE_TIME_INFINITY_QUERY_KEY = ['08-stale-time-infinity']
+const STALE_TIME_ZERO_QUERY_KEY = ['08-stale-0']
+const STALE_TIME_INFINITY_QUERY_KEY = ['08-stale-inf']
 
 type PanelWithStaleTimeProps = {
   queryKey: string[]

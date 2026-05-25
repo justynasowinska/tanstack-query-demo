@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { isValidElement, useState } from 'react'
 import { DemoQueryToolbar } from './DemoQueryToolbar'
 
 type QueryToolsWrapperProps = {
@@ -21,6 +21,12 @@ export function QueryToolsWrapper({
 }: QueryToolsWrapperProps) {
   const queryClient = useQueryClient()
   const [remountKey, setRemountKey] = useState(0)
+  const queryKeyText = JSON.stringify(queryKey)
+  const hasQueryKeyInDescription =
+    isValidElement<{ children?: React.ReactNode }>(description) &&
+    description.type === 'pre' &&
+    typeof description.props.children === 'string' &&
+    description.props.children.trimStart().startsWith('queryKey:')
 
   const handleRefetch = () => {
     if (onRefetch) {
@@ -41,6 +47,9 @@ export function QueryToolsWrapper({
         {(title || description) && (
           <div className="query-tools-header">
             {title && <p className="query-tools-title">{title}</p>}
+            {!hasQueryKeyInDescription && (
+              <pre className="query-tools-code-block">{`queryKey: ${queryKeyText}`}</pre>
+            )}
             {description && <div className="query-tools-description">{description}</div>}
           </div>
         )}

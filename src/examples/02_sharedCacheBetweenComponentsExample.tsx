@@ -5,7 +5,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
-const SHARED_QUERY_KEY = ['02-shared-cache']
+const SHARED_QUERY_KEY = ['04-shared']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -43,10 +43,10 @@ function PanelBQueryContent({ queryKey }: PanelQueryContentProps) {
 export function SharedCacheBetweenComponentsExample() {
   return (
     <AccordionSection
-      id="02_shared-cache-between-components"
-      title="02 Shared Cache Between Components"
+      id="04_shared-cache-between-components"
+      title="04 Shared Cache Between Components"
       description={
-        "Both panels use queryKey ['02-shared-cache']; refetch/remount in one updates shared cache and rerenders both because they subscribe to the data object, which changes on every fetch due to random changingValue, even when Panel A renders only firstName."
+        "Both panels use queryKey ['04-shared']; refetch/remount in one updates shared cache and rerenders both because they subscribe to the data object, which changes on every fetch due to random changingValue, even when Panel A renders only firstName."
       }
     >
       <PanelsRow>
@@ -54,7 +54,7 @@ export function SharedCacheBetweenComponentsExample() {
           queryKey={SHARED_QUERY_KEY}
           title="Panel A"
           description={
-            <pre className="query-tools-code-block">{`queryKey: ['02-shared-cache']
+            <pre className="query-tools-code-block">{`queryKey: ['04-shared']
 const { data } = useQuery(...)`}</pre>
           }
         >
@@ -65,7 +65,7 @@ const { data } = useQuery(...)`}</pre>
           queryKey={SHARED_QUERY_KEY}
           title="Panel B"
           description={
-            <pre className="query-tools-code-block">{`queryKey: ['02-shared-cache']
+            <pre className="query-tools-code-block">{`queryKey: ['04-shared']
 const { data } = useQuery(...)`}</pre>
           }
         >

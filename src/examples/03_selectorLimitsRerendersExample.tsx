@@ -5,7 +5,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
-const SELECTOR_QUERY_KEY = ['03-selector-limits-rerenders']
+const SELECTOR_QUERY_KEY = ['03-select']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -47,14 +47,14 @@ export function SelectorLimitsRerendersExample() {
     <AccordionSection
       id="03_selector-limits-rerenders"
       title="03 Selector Limits Rerenders"
-      description="Both panels share queryKey ['03-selector-limits-rerenders'] and the same cache entry. Panel A subscribes to the full query data object via const { data } = useQuery(...), so data updates (including changingValue) can trigger rerenders. Panel B uses select to subscribe to firstName only, so data-driven rerenders are limited when firstName remains unchanged."
+      description="Both panels share queryKey ['03-select'] and the same cache entry. Panel A subscribes to the full query data object via const { data } = useQuery(...), so data updates (including changingValue) can trigger rerenders. Panel B uses select to subscribe to firstName only, so data-driven rerenders are limited when firstName remains unchanged."
     >
       <PanelsRow>
         <QueryToolsWrapper
           queryKey={SELECTOR_QUERY_KEY}
           title="Panel A (full data subscription)"
           description={
-            <pre className="query-tools-code-block">{`queryKey: ['03-selector-limits-rerenders']
+            <pre className="query-tools-code-block">{`queryKey: ['03-select']
 const { data } = useQuery(...)`}</pre>
           }
         >

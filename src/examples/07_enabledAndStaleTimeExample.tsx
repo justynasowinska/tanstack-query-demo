@@ -5,8 +5,8 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
-const ENABLED_FALSE_QUERY_KEY = ['07-enabled-false']
-const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['07-enabled-true-default']
+const ENABLED_FALSE_QUERY_KEY = ['07-en-off']
+const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['07-en-on']
 
 type PanelQueryContentProps = {
   queryKey: string[]

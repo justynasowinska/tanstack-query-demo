@@ -85,11 +85,13 @@ export async function fetchDemoUser(
   fetchDemoUserCallCount += 1
   fetchDemoUserCallCountSubscribers.forEach((notify) => notify())
 
+  const roundedChangingValue = Number(Math.random().toFixed(5))
+
   return mockApiRequest(
     () => ({
       id: 1,
       firstName: 'Demo',
-      changingValue: Math.random(),
+      changingValue: roundedChangingValue,
     }),
     {
       ...options,

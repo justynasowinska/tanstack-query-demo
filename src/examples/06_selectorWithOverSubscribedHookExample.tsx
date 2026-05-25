@@ -5,7 +5,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
-const SELECTOR_HOOK_COMPARISON_QUERY_KEY = ['06-selector-hook-comparison']
+const SELECTOR_HOOK_COMPARISON_QUERY_KEY = ['06-hook-select']
 
 type PanelQueryContentProps = {
   queryKey: string[]

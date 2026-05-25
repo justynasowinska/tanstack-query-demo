@@ -5,7 +5,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileQueryOptions } from '../hooks/useUserProfile'
 
-const IS_FETCHING_QUERY_KEY = ['04-is-fetching-subscription']
+const IS_FETCHING_QUERY_KEY = ['02-tracked']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -45,16 +45,16 @@ function PanelDataAndIsFetching({ queryKey }: PanelQueryContentProps) {
 export function IsFetchingSubscriptionRerenderExample() {
   return (
     <AccordionSection
-      id="04_is-fetching-subscription-rerender"
-      title="04 isFetching Subscription Rerender"
-      description="Both panels share queryKey ['04-is-fetching-subscription']. Panel A subscribes only to data. Panel B subscribes to data + isFetching, so it rerenders on isFetching state transitions even though isFetching is not rendered in the component output."
+      id="02_subscription-rerender-tracked-values"
+      title="02 Tracked Values Rerender"
+      description="Both panels share queryKey ['02-tracked'] (shared cache). useQuery automatically subscribes the component to tracked values it reads. Panel A tracks only data. Panel B tracks data + isFetching, so any change in tracked values rerenders the component, even when isFetching is not rendered in UI."
     >
       <PanelsRow>
         <QueryToolsWrapper
           queryKey={IS_FETCHING_QUERY_KEY}
           title="Panel A (data only subscription)"
           description={
-            <pre className="query-tools-code-block">{`queryKey: ['04-is-fetching-subscription']
+            <pre className="query-tools-code-block">{`queryKey: ['02-tracked']
 const { data } = useQuery(...)`}</pre>
           }
         >
