@@ -11,6 +11,7 @@ import { HookOverSubscriptionRerenderExample } from './examples/05_hookOverSubsc
 import { SelectorWithOverSubscribedHookExample } from './examples/06_selectorWithOverSubscribedHookExample'
 import { EnabledExample } from './examples/07_enabledAndStaleTimeExample'
 import { StaleTimeExample } from './examples/08_staleTimeExample'
+import { GcTimeExample } from './examples/09_gcTimeExample'
 import { SubscribedFocusExample } from './examples/09_subscribedFocusExample'
 import { NotifyOnChangePropsTrackedValuesExample } from './examples/10_subscribedVsNotifyOnChangePropsExample'
 import { SubscribedVsNotifyOnChangePropsExample } from './examples/11_subscribedVsNotifyOnChangePropsExample'
@@ -89,11 +90,12 @@ function App() {
         <BasicUserQueryExample />
         <IsFetchingSubscriptionRerenderExample />
         <HookOverSubscriptionRerenderExample />
-        <SelectorLimitsRerendersExample />
         <SharedCacheBetweenComponentsExample />
+        <SelectorLimitsRerendersExample />
         <SelectorWithOverSubscribedHookExample />
         <EnabledExample />
         <StaleTimeExample />
+        <GcTimeExample />
         <SubscribedFocusExample />
         <NotifyOnChangePropsTrackedValuesExample />
         <SubscribedVsNotifyOnChangePropsExample />

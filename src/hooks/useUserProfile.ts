@@ -1,13 +1,13 @@
 import { queryOptions } from '@tanstack/react-query'
 import { fetchDemoUser } from '../api/mockApi'
 
-type UserProfileQueryOptionsParams = {
+type userProfileOptionsParams = {
   queryKey: string[]
 }
 
-export function userProfileQueryOptions({
+export function userProfileOptions({
   queryKey,
-}: UserProfileQueryOptionsParams) {
+}: userProfileOptionsParams) {
   return queryOptions({
     queryKey,
     queryFn: () =>

@@ -3,7 +3,7 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
 const HOOK_OVER_SUBSCRIPTION_QUERY_KEY = ['03-hook']
 
@@ -12,7 +12,7 @@ type PanelQueryContentProps = {
 }
 
 function useUser(queryKey: string[]) {
-  const { data, isFetching } = useQuery(userProfileQueryOptions({ queryKey }))
+  const { data, isFetching } = useQuery(userProfileOptions({ queryKey }))
 
   return {
     data,

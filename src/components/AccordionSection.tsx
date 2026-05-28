@@ -3,7 +3,7 @@ import { useState, type ReactNode } from 'react'
 type ExampleAccordionSectionProps = {
   id: string
   title: string
-  description: string
+  description: ReactNode
   defaultOpen?: boolean
   children: ReactNode
 }

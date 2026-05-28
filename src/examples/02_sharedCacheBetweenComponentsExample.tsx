@@ -3,7 +3,7 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
 const SHARED_QUERY_KEY = ['04-shared']
 
@@ -12,7 +12,7 @@ type PanelQueryContentProps = {
 }
 
 function PanelAQueryContent({ queryKey }: PanelQueryContentProps) {
-  const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const { data } = useQuery(userProfileOptions({ queryKey }))
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -26,7 +26,7 @@ function PanelAQueryContent({ queryKey }: PanelQueryContentProps) {
 }
 
 function PanelBQueryContent({ queryKey }: PanelQueryContentProps) {
-  const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const { data } = useQuery(userProfileOptions({ queryKey }))
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -44,15 +44,15 @@ export function SharedCacheBetweenComponentsExample() {
   return (
     <AccordionSection
       id="04_shared-cache-between-components"
-      title="04 Shared Cache Between Components"
+      title="04 Full Data Subscription"
       description={
-        "Both panels use queryKey ['04-shared']; refetch/remount in one updates shared cache and rerenders both because they subscribe to the data object, which changes on every fetch due to random changingValue, even when Panel A renders only firstName."
+        "With const { data } = useQuery(...), the component subscribes to the whole data object, even if it does not need all fields. That can cause unnecessary rerenders: Panel A renders only firstName, but it still rerenders on every fetch because API returns changingValue inside data and that field changes all the time, even though Panel A does not use it in UI."
       }
     >
       <PanelsRow>
         <QueryToolsWrapper
           queryKey={SHARED_QUERY_KEY}
-          title="Panel A"
+          title="Panel A (uses only firstName)"
           description={
             <pre className="query-tools-code-block">{`queryKey: ['04-shared']
 const { data } = useQuery(...)`}</pre>
@@ -63,7 +63,7 @@ const { data } = useQuery(...)`}</pre>
 
         <QueryToolsWrapper
           queryKey={SHARED_QUERY_KEY}
-          title="Panel B"
+          title="Panel B (shows changingValue too)"
           description={
             <pre className="query-tools-code-block">{`queryKey: ['04-shared']
 const { data } = useQuery(...)`}</pre>

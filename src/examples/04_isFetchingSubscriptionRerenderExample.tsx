@@ -3,7 +3,7 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
 const IS_FETCHING_QUERY_KEY = ['02-tracked']
 
@@ -12,7 +12,7 @@ type PanelQueryContentProps = {
 }
 
 function PanelDataOnly({ queryKey }: PanelQueryContentProps) {
-  const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const { data } = useQuery(userProfileOptions({ queryKey }))
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -26,7 +26,7 @@ function PanelDataOnly({ queryKey }: PanelQueryContentProps) {
 }
 
 function PanelDataAndIsFetching({ queryKey }: PanelQueryContentProps) {
-  const { data, isFetching } = useQuery(userProfileQueryOptions({ queryKey }))
+  const { data, isFetching } = useQuery(userProfileOptions({ queryKey }))
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   // Keep isFetching subscription active, but do not render it in UI.

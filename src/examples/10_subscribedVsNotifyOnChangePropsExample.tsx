@@ -4,9 +4,9 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SHARED_NOTIFY_QUERY_KEY = ['10-notify']
+const SHARED_NOTIFY_QUERY_KEY = ['11-notify']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -57,7 +57,7 @@ function PanelWithTrackedDataAndFetching({
   notifyMode,
 }: NotifyPanelWithTrackedValuesProps) {
   const { data, isFetching } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     notifyOnChangeProps: resolveNotifyOnChangeProps(notifyMode),
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
@@ -76,7 +76,7 @@ function PanelWithTrackedDataAndFetching({
 
 function PanelWithTrackedDataOnly({ queryKey, notifyMode }: NotifyPanelWithTrackedValuesProps) {
   const { data } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     notifyOnChangeProps: resolveNotifyOnChangeProps(notifyMode),
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
@@ -117,7 +117,7 @@ function PanelWithTrackedDataAndFetchingControls({ queryKey }: PanelQueryContent
       }
       description={
         <pre className="query-tools-code-block">{`const { data, isFetching } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   notifyOnChangeProps,
 })`}</pre>
       }
@@ -151,7 +151,7 @@ function PanelWithTrackedDataOnlyControls({ queryKey }: PanelQueryContentProps) 
       }
       description={
         <pre className="query-tools-code-block">{`const { data } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   notifyOnChangeProps,
 })`}</pre>
       }
@@ -164,8 +164,8 @@ function PanelWithTrackedDataOnlyControls({ queryKey }: PanelQueryContentProps) 
 export function NotifyOnChangePropsTrackedValuesExample() {
   return (
     <AccordionSection
-      id="10_notify-on-change-props-tracked-values"
-      title="10 notifyOnChangeProps (tracked values)"
+      id="11_notify-on-change-props-tracked-values"
+      title="11 notifyOnChangeProps (tracked values)"
       description="Both panels share the same queryKey (shared cache) and each panel configures notifyOnChangeProps separately. Panel A reads { data, isFetching }, while Panel B reads only { data }. With tracked mode, rerenders depend on which fields are actually used by each component."
     >
       <PanelsRow>

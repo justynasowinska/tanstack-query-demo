@@ -3,18 +3,23 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
-const ENABLED_FALSE_QUERY_KEY = ['07-en-off']
-const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['07-en-on']
+const ENABLED_FALSE_QUERY_KEY = ['07-enabled-false']
+const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['07-enabled-true']
 
 type PanelQueryContentProps = {
   queryKey: string[]
 }
 
 function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
-  const { data } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+  const {
+    data,
+    isFetching,
+    isPending,
+    isLoading,
+  } = useQuery({
+    ...userProfileOptions({ queryKey }),
     enabled: false,
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
@@ -24,14 +29,22 @@ function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName ?? '(no data yet)'}</p>
+        <p>isFetching: {String(isFetching)}</p>
+        <p>isPending: {String(isPending)}</p>
+        <p>isLoading: {String(isLoading)}</p>
       </div>
     </div>
   )
 }
 
 function PanelEnabledTrueDefault({ queryKey }: PanelQueryContentProps) {
-  const { data } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+  const {
+    data,
+    isFetching,
+    isPending,
+    isLoading,
+  } = useQuery({
+    ...userProfileOptions({ queryKey }),
     enabled: true,
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
@@ -41,6 +54,9 @@ function PanelEnabledTrueDefault({ queryKey }: PanelQueryContentProps) {
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName ?? '(loading...)'}</p>
+        <p>isFetching: {String(isFetching)}</p>
+        <p>isPending: {String(isPending)}</p>
+        <p>isLoading: {String(isLoading)}</p>
       </div>
     </div>
   )
@@ -51,7 +67,7 @@ export function EnabledExample() {
 
   const handleEnabledFalseRefetch = () => {
     void queryClient.fetchQuery(
-      userProfileQueryOptions({
+      userProfileOptions({
         queryKey: ENABLED_FALSE_QUERY_KEY,
       })
     )
@@ -61,16 +77,68 @@ export function EnabledExample() {
     <AccordionSection
       id="07_enabled"
       title="07 Enabled"
-      description="Two panels compare enabled: false vs enabled: true (default). Use remount to show how each query behaves when the component mounts again. In Panel A, Refetch uses queryClient.fetchQuery because refetchQueries does not trigger disabled-only queries."
+      description={
+        <>
+          Enabled controls <strong>automatic query execution</strong>. The main purpose
+          of enabled is running queries that depend on other data (for example
+          userId coming from another query), or running lazy queries (for example
+          after setting a filter). If a query has enabled: false, you can still run{' '}
+          <strong>manual refetch</strong>. Observe isFetching, isPending, and
+          isLoading statuses in the panels, especially when query uses
+          enabled: false. Try running Invalidate in DevTools on both queries -
+          a disabled query is always treated as <strong>Fresh</strong>, and it
+          will not refetch even after being invalidated.
+          <br />
+          <br />
+          <a
+            href="https://tanstack.com/query/latest/docs/framework/react/guides/disabling-queries"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read more in docs
+          </a>
+          .
+        </>
+      }
     >
+      <details className="basic-query-guide">
+        <summary className="basic-query-guide-summary">Important information about disabled queries</summary>
+
+        <div className="basic-query-guide-content">
+          <p>
+            <strong>enabled: false is not a query validation mechanism.</strong>
+             {' '}It only prevents automatic fetch execution.
+          </p>
+
+          <p>
+            You can still trigger refetch manually, so there is still a risk that
+            fetch will run without required data (for example missing userId).
+          </p>
+
+          <pre className="query-tools-code-block">{`const { refetch } = useQuery({
+  ...userProfileOptions(userId),
+  enabled: !!userId,
+})
+
+const onRefetchData = () => {
+  refetch() // will refetch even when enabled is false
+}`}</pre>
+        </div>
+      </details>
+
       <PanelsRow>
         <QueryToolsWrapper
           queryKey={ENABLED_FALSE_QUERY_KEY}
           title="Panel A (enabled: false)"
           onRefetch={handleEnabledFalseRefetch}
           description={
-            <pre className="query-tools-code-block">{`useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+            <pre className="query-tools-code-block">{`const {
+  data,
+  isFetching,
+  isPending,
+  isLoading,
+} = useQuery({
+  ...userProfileOptions({ queryKey }),
   enabled: false,
 })`}</pre>
           }
@@ -82,8 +150,13 @@ export function EnabledExample() {
           queryKey={ENABLED_TRUE_DEFAULT_QUERY_KEY}
           title="Panel B (enabled: true default)"
           description={
-            <pre className="query-tools-code-block">{`useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+            <pre className="query-tools-code-block">{`const {
+  data,
+  isFetching,
+  isPending,
+  isLoading,
+} = useQuery({
+  ...userProfileOptions({ queryKey }),
   enabled: true, // default
 })`}</pre>
           }

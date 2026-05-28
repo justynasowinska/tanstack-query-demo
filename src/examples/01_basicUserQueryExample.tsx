@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AccordionSection } from '../components/AccordionSection'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
 const BASIC_INFORMATION_QUERY_KEY = ['01-basic']
 
@@ -11,7 +11,7 @@ type UserProfileQueryContentProps = {
 }
 
 function UserProfileQueryContent({ queryKey }: UserProfileQueryContentProps) {
-  const { data } = useQuery(userProfileQueryOptions({ queryKey }))
+  const { data } = useQuery(userProfileOptions({ queryKey }))
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -28,8 +28,16 @@ export function BasicUserQueryExample() {
   return (
     <AccordionSection
       id="01_basic-user-query"
-      title="01 Basic Information"
-      description="Basic information about query lifecycle and demo controls."
+      title="01 Introduction"
+      description={
+        <>
+          Start by watching TanStack DevTools while opening and closing this
+          accordion: the component that uses useQuery mounts and unmounts, and
+          cache metadata changes (observers, Stale, Inactive). Then run Refetch
+          and Remount this component to compare cache transitions. You can also run
+          refetch and other actions from DevTools Actions.
+        </>
+      }
     >
       <details className="basic-query-guide" open>
         <summary className="basic-query-guide-summary">How to test this demo</summary>
@@ -39,6 +47,15 @@ export function BasicUserQueryExample() {
             If TanStack DevTools is hidden, open it with the palm tree icon in the
             bottom-right corner. Select this query cache entry and watch Query Details
             while using Refetch and Remount.
+          </p>
+
+          <p>
+            When this component rerenders, it briefly flashes purple so you can
+            immediately see rerender moments.
+          </p>
+
+          <p>
+            The function below is the one used to fetch data for this demo query.
           </p>
 
           <pre className="query-tools-code-block">{`export async function fetchDemoUser(options?: MockRequestOptions) {

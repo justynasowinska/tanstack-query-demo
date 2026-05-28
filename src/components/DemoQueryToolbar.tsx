@@ -15,7 +15,7 @@ export function DemoQueryToolbar({
 
       {onRemount && (
         <button type="button" onClick={onRemount}>
-          Remount this panel
+          Remount this component
         </button>
       )}
     </div>

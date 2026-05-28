@@ -3,7 +3,7 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
 const SELECTOR_HOOK_COMPARISON_QUERY_KEY = ['06-hook-select']
 
@@ -11,9 +11,9 @@ type PanelQueryContentProps = {
   queryKey: string[]
 }
 
-function useFirstNameWithOverSubscribedHook(queryKey: string[]) {
+function useFirstName(queryKey: string[]) {
   const { data: firstName, isFetching } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     select: (data) => data.firstName,
   })
 
@@ -24,7 +24,7 @@ function useFirstNameWithOverSubscribedHook(queryKey: string[]) {
 }
 
 function PanelWithOverSubscribedHook({ queryKey }: PanelQueryContentProps) {
-  const { firstName } = useFirstNameWithOverSubscribedHook(queryKey)
+  const { firstName } = useFirstName(queryKey)
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -39,7 +39,7 @@ function PanelWithOverSubscribedHook({ queryKey }: PanelQueryContentProps) {
 
 function PanelWithProperQuery({ queryKey }: PanelQueryContentProps) {
   const { data: firstName } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     select: (data) => data.firstName,
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
@@ -66,15 +66,18 @@ export function SelectorWithOverSubscribedHookExample() {
           queryKey={SELECTOR_HOOK_COMPARISON_QUERY_KEY}
           title="Panel A (selector + over-subscribed hook)"
           description={
-            <pre className="query-tools-code-block">{`function useFirstNameWithOverSubscribedHook(queryKey) {
+            <pre className="query-tools-code-block">{`function useFirstName(queryKey) {
   const { data: firstName, isFetching } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     select: (data) => data.firstName,
   })
-  return { firstName, isFetching }
+  return {
+    firstName,
+    isFetching: query.isFetching,
+  }
 }
 
-const { firstName } = useFirstNameWithOverSubscribedHook(queryKey)`}</pre>
+const { firstName } = useFirstName(queryKey)`}</pre>
           }
         >
           <PanelWithOverSubscribedHook queryKey={SELECTOR_HOOK_COMPARISON_QUERY_KEY} />
@@ -85,7 +88,7 @@ const { firstName } = useFirstNameWithOverSubscribedHook(queryKey)`}</pre>
           title="Panel B (selector + direct useQuery)"
           description={
             <pre className="query-tools-code-block">{`const { data: firstName } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   select: (data) => data.firstName,
 })`}</pre>
           }

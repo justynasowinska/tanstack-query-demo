@@ -4,9 +4,9 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SUBSCRIBED_FOCUS_QUERY_KEY = ['09-sub']
+const SUBSCRIBED_FOCUS_QUERY_KEY = ['10-sub']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -21,7 +21,7 @@ function PanelWithSubscribedToggle({
   isSubscribed,
 }: PanelWithSubscribedProps) {
   const { data, isFetching } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     subscribed: isSubscribed,
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
@@ -44,7 +44,7 @@ function PanelAWithLocalSubscribedToggle({ queryKey }: PanelQueryContentProps) {
   return (
     <QueryToolsWrapper
       queryKey={queryKey}
-      title="Panel A (subscribed controlled by toggle)"
+      title="Panel A"
       localControls={
         <label className="panel-inline-toggle">
           <input
@@ -59,7 +59,7 @@ function PanelAWithLocalSubscribedToggle({ queryKey }: PanelQueryContentProps) {
         <pre className="query-tools-code-block">{`const [isSubscribed, setIsSubscribed] = useState(true)
 
 const { data, isFetching } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   subscribed: isSubscribed,
 })`}</pre>
       }
@@ -75,7 +75,7 @@ function PanelBWithLocalSubscribedToggle({ queryKey }: PanelQueryContentProps) {
   return (
     <QueryToolsWrapper
       queryKey={queryKey}
-      title="Panel B (subscribed controlled by toggle)"
+      title="Panel B"
       localControls={
         <label className="panel-inline-toggle">
           <input
@@ -90,7 +90,7 @@ function PanelBWithLocalSubscribedToggle({ queryKey }: PanelQueryContentProps) {
         <pre className="query-tools-code-block">{`const [isSubscribed, setIsSubscribed] = useState(true)
 
 const { data, isFetching } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   subscribed: isSubscribed,
 })`}</pre>
       }
@@ -103,9 +103,29 @@ const { data, isFetching } = useQuery({
 export function SubscribedFocusExample() {
   return (
     <AccordionSection
-      id="09_subscribed-focus"
-      title="09 Subscribed On Focus"
-      description="Both panels read data + isFetching from useQuery with the same queryKey. Each panel has its own subscribed toggle. When subscribed is false, that panel stops receiving updates for both isFetching and data (including changingValue)."
+      id="10_subscribed-focus"
+      title="10 Subscribed"
+      description={
+        <>
+          When subscribed is false, that component stops observing the cache and
+          also stops automatic fetch behavior for itself (for example on remount).
+          You can still trigger a manual refetch, but this specific component will
+          not receive fresh data while it stays unsubscribed. subscribed also
+          affects whether the query has active observers: if all observers have
+          subscribed: false, the query becomes Inactive and its cache can
+          eventually be removed after gcTime expires.
+          <br />
+          <br />
+          <a
+            href="https://tanstack.com/query/latest/docs/framework/react/reference/useQuery"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read more in docs
+          </a>
+          .
+        </>
+      }
     >
       <PanelsRow>
         <PanelAWithLocalSubscribedToggle queryKey={SUBSCRIBED_FOCUS_QUERY_KEY} />

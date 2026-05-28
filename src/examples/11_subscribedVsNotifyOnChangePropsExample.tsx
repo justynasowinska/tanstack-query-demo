@@ -4,10 +4,10 @@ import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
-import { userProfileQueryOptions } from '../hooks/useUserProfile'
+import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SUBSCRIBED_GC_QUERY_KEY = ['11-sub', 'panel-a']
-const NOTIFY_GC_QUERY_KEY = ['11-notify', 'panel-b']
+const SUBSCRIBED_GC_QUERY_KEY = ['12-sub', 'panel-a']
+const NOTIFY_GC_QUERY_KEY = ['12-notify', 'panel-b']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -55,7 +55,7 @@ type SubscribedPanelContentProps = PanelQueryContentProps & {
 
 function SubscribedPanelContent({ queryKey, isSubscribed }: SubscribedPanelContentProps) {
   const { data, isFetching } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     subscribed: isSubscribed,
     gcTime: 3000,
   })
@@ -79,7 +79,7 @@ type NotifyPanelContentProps = PanelQueryContentProps & {
 
 function NotifyPanelContent({ queryKey, notifyMode }: NotifyPanelContentProps) {
   const { data, isFetching } = useQuery({
-    ...userProfileQueryOptions({ queryKey }),
+    ...userProfileOptions({ queryKey }),
     notifyOnChangeProps: resolveNotifyOnChangeProps(notifyMode),
     gcTime: 3000,
   })
@@ -116,7 +116,7 @@ function PanelWithSubscribedToggle({ queryKey }: PanelQueryContentProps) {
       }
       description={
         <pre className="query-tools-code-block">{`const { data, isFetching } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   subscribed,
   gcTime: 3000,
 })`}</pre>
@@ -151,7 +151,7 @@ function PanelWithNotifyOnChangePropsDropdown({ queryKey }: PanelQueryContentPro
       }
       description={
         <pre className="query-tools-code-block">{`const { data, isFetching } = useQuery({
-  ...userProfileQueryOptions({ queryKey }),
+  ...userProfileOptions({ queryKey }),
   notifyOnChangeProps,
   gcTime: 3000,
 })`}</pre>
@@ -165,8 +165,8 @@ function PanelWithNotifyOnChangePropsDropdown({ queryKey }: PanelQueryContentPro
 export function SubscribedVsNotifyOnChangePropsExample() {
   return (
     <AccordionSection
-      id="11_subscribed-vs-notify-on-change-props"
-      title="11 Subscribed vs notifyOnChangeProps"
+      id="12_subscribed-vs-notify-on-change-props"
+      title="12 Subscribed vs notifyOnChangeProps"
       description="Both panels use `const { data, isFetching } = useQuery(...)` and local gcTime: 3000, but each panel has a separate queryKey (separate cache). Panel A can fully unsubscribe with subscribed=false, so its cache can be garbage-collected quickly. Panel B stays subscribed and only changes rerender notifications via notifyOnChangeProps."
     >
       <PanelsRow>
