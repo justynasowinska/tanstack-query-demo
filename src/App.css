@@ -40,10 +40,16 @@
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 .top-nav-link:hover {
   background: var(--social-bg);
+  border-color: var(--accent-border);
+}
+
+.top-nav-link:active {
+  transform: scale(0.98);
 }
 
 .top-nav-icon-button {
@@ -57,12 +63,16 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 .top-nav-icon-button:hover {
   background: var(--social-bg);
   border-color: var(--accent-border);
+}
+
+.top-nav-icon-button:active {
+  transform: scale(0.98);
 }
 
 .top-nav-icon-button:focus-visible,
@@ -290,10 +300,16 @@
   background: var(--code-bg);
   color: inherit;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 .global-fetch-stats-reset-button:hover {
   background: var(--social-bg);
+  border-color: var(--accent-border);
+}
+
+.global-fetch-stats-reset-button:active {
+  transform: scale(0.96);
 }
 
 @media (max-width: 740px) {
@@ -329,6 +345,7 @@
   display: grid;
   gap: 6px;
   cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
 .accordion-trigger-header {
@@ -351,6 +368,10 @@
 
 .accordion-trigger:hover {
   background: var(--info-hover-bg);
+}
+
+.accordion-trigger:active {
+  transform: scale(0.99);
 }
 
 .accordion-trigger[aria-expanded='true'] {
@@ -506,10 +527,16 @@
   background: var(--code-bg);
   color: inherit;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 .query-toolbar button:hover {
   background: var(--social-bg);
+  border-color: var(--accent-border);
+}
+
+.query-toolbar button:active {
+  transform: scale(0.96);
 }
 
 .query-state-panel-wrapper {

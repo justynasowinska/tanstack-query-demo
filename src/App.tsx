@@ -56,17 +56,13 @@ function App() {
           <button
             type="button"
             className="top-nav-icon-button"
-            aria-label={theme === 'dark' ? 'Przełącz na jasny motyw' : 'Przełącz na ciemny motyw'}
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             onClick={toggleTheme}
           >
             {theme === 'dark' ? (
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 4a1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1Zm0-18a1 1 0 0 1-1-1V2a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1Zm10 9a1 1 0 1 1 0-2h-1a1 1 0 1 1 0 2h1ZM4 12a1 1 0 1 1 0-2H3a1 1 0 1 1 0 2h1Zm14.07 7.07a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.7a1 1 0 0 1 0 1.42ZM7.05 8.05a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.7.71a1 1 0 0 1 0 1.41Zm0 10.31-.7.71a1 1 0 0 1-1.42-1.41l.71-.7a1 1 0 0 1 1.41 1.4Zm10.31-10.31a1 1 0 0 1-1.41-1.41l.7-.71a1 1 0 1 1 1.42 1.41l-.71.71Z" />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sun w-3.5 h-3.5 hidden light:block" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
             ) : (
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M21 13.24A9 9 0 1 1 10.76 3a1 1 0 0 1 .79 1.63A7 7 0 1 0 19.37 12a1 1 0 0 1 1.63.79v.45Z" />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path fill="none" d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
             )}
           </button>
 
