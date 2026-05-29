@@ -15,6 +15,7 @@ import { GcTimeExample } from './examples/09_gcTime'
 import { SubscribedFocusExample } from './examples/10_subscribed'
 import { NotifyOnChangePropsTrackedValuesExample } from './examples/11_notifyOnChangeProps'
 import { SubscribedVsNotifyOnChangePropsExample } from './examples/12_subscribedVsNotifyOnChangeProps'
+import { SelectorParametersExample } from './examples/13_selectorParameters'
 
 type Theme = 'dark' | 'light'
 
@@ -95,6 +96,7 @@ function App() {
         <SubscribedFocusExample />
         <NotifyOnChangePropsTrackedValuesExample />
         <SubscribedVsNotifyOnChangePropsExample />
+        <SelectorParametersExample />
       </PageShell>
     </>
   )
