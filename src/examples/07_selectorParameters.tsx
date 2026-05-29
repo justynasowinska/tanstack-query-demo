@@ -6,7 +6,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SELECTOR_PARAMS_QUERY_KEY = ['13-selector-params']
+const SELECTOR_PARAMS_QUERY_KEY = ['07-selector-params']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -161,8 +161,8 @@ const { data: filteredName } = useQuery({
 export function SelectorParametersExample() {
   return (
     <AccordionSection
-      id="13_selector-parameters"
-      title="13 Selector with parameters"
+      id="07_selector-parameters"
+      title="07 Selector Parameters"
       description={
         <>
           Panel A returns <strong>getFilteredName</strong> from <strong>selectData</strong>, then calls it

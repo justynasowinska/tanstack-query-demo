@@ -5,8 +5,8 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const GC_TIME_FIVE_SECONDS_QUERY_KEY = ['09-gc-5s']
-const GC_TIME_INFINITY_QUERY_KEY = ['09-gc-inf']
+const GC_TIME_FIVE_SECONDS_QUERY_KEY = ['10-gc-5s']
+const GC_TIME_INFINITY_QUERY_KEY = ['10-gc-inf']
 
 type PanelWithGcTimeProps = {
   queryKey: string[]
@@ -33,8 +33,8 @@ function PanelWithLocalGcTime({ queryKey, gcTime }: PanelWithGcTimeProps) {
 export function GcTimeExample() {
   return (
     <AccordionSection
-      id="09_gc-time"
-      title="09 gcTime"
+      id="10_gc-time"
+      title="10 gcTime"
       description={
         <>
           gcTime is the time in milliseconds that unused/inactive cache data stays

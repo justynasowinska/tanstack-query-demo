@@ -5,8 +5,8 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const STALE_TIME_FIVE_SECONDS_QUERY_KEY = ['08-stale-5s']
-const STALE_TIME_INFINITY_QUERY_KEY = ['08-stale-inf']
+const STALE_TIME_FIVE_SECONDS_QUERY_KEY = ['09-stale-5s']
+const STALE_TIME_INFINITY_QUERY_KEY = ['09-stale-inf']
 
 type PanelWithStaleTimeProps = {
   queryKey: string[]
@@ -33,8 +33,8 @@ function PanelWithLocalStaleTime({ queryKey, staleTime }: PanelWithStaleTimeProp
 export function StaleTimeExample() {
   return (
     <AccordionSection
-      id="08_stale-time"
-      title="08 Stale Time and Invalidation"
+      id="09_stale-time"
+      title="09 Stale Time and Invalidation"
       description={
         <>
           staleTime tells TanStack Query how long cached data should stay fresh. If data is already in cache and mount/remount happens before

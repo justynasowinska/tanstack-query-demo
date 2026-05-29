@@ -6,7 +6,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SHARED_NOTIFY_QUERY_KEY = ['11-notify']
+const SHARED_NOTIFY_QUERY_KEY = ['12-notify']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -164,8 +164,8 @@ function PanelWithTrackedDataOnlyControls({ queryKey }: PanelQueryContentProps) 
 export function NotifyOnChangePropsTrackedValuesExample() {
   return (
     <AccordionSection
-      id="11_notify-on-change-props-tracked-values"
-      title="11 notifyOnChangeProps"
+      id="12_notify-on-change-props-tracked-values"
+      title="12 notifyOnChangeProps"
       description={
         <>
           `notifyOnChangeProps` modifies the default tracked-values behavior. If a component tracks{' '}

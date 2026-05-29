@@ -6,8 +6,8 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SUBSCRIBED_GC_QUERY_KEY = ['12-sub-panel-a']
-const NOTIFY_GC_QUERY_KEY = ['12-notify-panel-b']
+const SUBSCRIBED_GC_QUERY_KEY = ['13-sub-panel-a']
+const NOTIFY_GC_QUERY_KEY = ['13-notify-panel-b']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -165,8 +165,8 @@ function PanelWithNotifyOnChangePropsDropdown({ queryKey }: PanelQueryContentPro
 export function SubscribedVsNotifyOnChangePropsExample() {
   return (
     <AccordionSection
-      id="12_subscribed-vs-notify-on-change-props"
-      title="12 Subscribed vs notifyOnChangeProps"
+      id="13_subscribed-vs-notify-on-change-props"
+      title="13 Subscribed vs notifyOnChangeProps"
       description={
         <>
           With <strong>notifyOnChangeProps: []</strong> you can get an effect similar to{' '}

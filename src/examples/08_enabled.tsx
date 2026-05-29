@@ -5,8 +5,8 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const ENABLED_FALSE_QUERY_KEY = ['07-enabled-false']
-const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['07-enabled-true']
+const ENABLED_FALSE_QUERY_KEY = ['08-enabled-false']
+const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['08-enabled-true']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -75,8 +75,8 @@ export function EnabledExample() {
 
   return (
     <AccordionSection
-      id="07_enabled"
-      title="07 Enabled"
+      id="08_enabled"
+      title="08 Enabled"
       description={
         <>
           Enabled controls <strong>automatic query execution</strong>. The main purpose

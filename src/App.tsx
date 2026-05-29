@@ -9,13 +9,13 @@ import { HookOverSubscriptionRerenderExample } from './examples/03_hookOverSubsc
 import { SharedCacheBetweenComponentsExample } from './examples/04_fullDataSubscription'
 import { SelectorLimitsRerendersExample } from './examples/05_selectorLimitsRerenders'
 import { SelectorWithOverSubscribedHookExample } from './examples/06_selectorWithOverSubscribedHook'
-import { EnabledExample } from './examples/07_enabled'
-import { StaleTimeExample } from './examples/08_staleTimeAndInvalidation'
-import { GcTimeExample } from './examples/09_gcTime'
-import { SubscribedFocusExample } from './examples/10_subscribed'
-import { NotifyOnChangePropsTrackedValuesExample } from './examples/11_notifyOnChangeProps'
-import { SubscribedVsNotifyOnChangePropsExample } from './examples/12_subscribedVsNotifyOnChangeProps'
-import { SelectorParametersExample } from './examples/13_selectorParameters'
+import { SelectorParametersExample } from './examples/07_selectorParameters'
+import { EnabledExample } from './examples/08_enabled'
+import { StaleTimeExample } from './examples/09_staleTimeAndInvalidation'
+import { GcTimeExample } from './examples/10_gcTime'
+import { SubscribedFocusExample } from './examples/11_subscribed'
+import { NotifyOnChangePropsTrackedValuesExample } from './examples/12_notifyOnChangeProps'
+import { SubscribedVsNotifyOnChangePropsExample } from './examples/13_subscribedVsNotifyOnChangeProps'
 
 type Theme = 'dark' | 'light'
 
@@ -90,13 +90,13 @@ function App() {
         <SharedCacheBetweenComponentsExample />
         <SelectorLimitsRerendersExample />
         <SelectorWithOverSubscribedHookExample />
+        <SelectorParametersExample />
         <EnabledExample />
         <StaleTimeExample />
         <GcTimeExample />
         <SubscribedFocusExample />
         <NotifyOnChangePropsTrackedValuesExample />
         <SubscribedVsNotifyOnChangePropsExample />
-        <SelectorParametersExample />
       </PageShell>
     </>
   )

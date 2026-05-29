@@ -6,7 +6,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SUBSCRIBED_FOCUS_QUERY_KEY = ['10-subscribed']
+const SUBSCRIBED_FOCUS_QUERY_KEY = ['11-subscribed']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -103,8 +103,8 @@ const { data, isFetching } = useQuery({
 export function SubscribedFocusExample() {
   return (
     <AccordionSection
-      id="10_subscribed-focus"
-      title="10 Subscribed"
+      id="11_subscribed-focus"
+      title="11 Subscribed"
       description={
         <>
           When subscribed is false, that component stops observing the cache and
