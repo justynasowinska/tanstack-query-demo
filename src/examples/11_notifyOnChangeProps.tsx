@@ -6,8 +6,7 @@ import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
 import { useRerenderFlash } from '../components/useRerenderFlash'
 import { userProfileOptions } from '../hooks/useUserProfile'
 
-const SUBSCRIBED_GC_QUERY_KEY = ['12-sub', 'panel-a']
-const NOTIFY_GC_QUERY_KEY = ['12-notify', 'panel-b']
+const SHARED_NOTIFY_QUERY_KEY = ['11-notify']
 
 type PanelQueryContentProps = {
   queryKey: string[]
@@ -49,39 +48,17 @@ function resolveNotifyOnChangeProps(
   }
 }
 
-type SubscribedPanelContentProps = PanelQueryContentProps & {
-  isSubscribed: boolean
-}
-
-function SubscribedPanelContent({ queryKey, isSubscribed }: SubscribedPanelContentProps) {
-  const { data, isFetching } = useQuery({
-    ...userProfileOptions({ queryKey }),
-    subscribed: isSubscribed,
-    gcTime: 3000,
-  })
-  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
-
-  return (
-    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
-      <span className="query-state-panel-label">Rendered component</span>
-      <div className="query-state-panel">
-        <p>First Name: {data?.firstName ?? '(no data)'}</p>
-        <p>changingValue: {data?.changingValue ?? '(no data)'}</p>
-        <p>isFetching: {String(isFetching)}</p>
-      </div>
-    </div>
-  )
-}
-
-type NotifyPanelContentProps = PanelQueryContentProps & {
+type NotifyPanelWithTrackedValuesProps = PanelQueryContentProps & {
   notifyMode: NotifyMode
 }
 
-function NotifyPanelContent({ queryKey, notifyMode }: NotifyPanelContentProps) {
+function PanelWithTrackedDataAndFetching({
+  queryKey,
+  notifyMode,
+}: NotifyPanelWithTrackedValuesProps) {
   const { data, isFetching } = useQuery({
     ...userProfileOptions({ queryKey }),
     notifyOnChangeProps: resolveNotifyOnChangeProps(notifyMode),
-    gcTime: 3000,
   })
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
@@ -97,43 +74,32 @@ function NotifyPanelContent({ queryKey, notifyMode }: NotifyPanelContentProps) {
   )
 }
 
-function PanelWithSubscribedToggle({ queryKey }: PanelQueryContentProps) {
-  const [isSubscribed, setIsSubscribed] = useState(true)
+function PanelWithTrackedDataOnly({ queryKey, notifyMode }: NotifyPanelWithTrackedValuesProps) {
+  const { data } = useQuery({
+    ...userProfileOptions({ queryKey }),
+    notifyOnChangeProps: resolveNotifyOnChangeProps(notifyMode),
+  })
+  const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
-    <QueryToolsWrapper
-      queryKey={queryKey}
-      title="Panel A (subscribed + gcTime: 3000)"
-      localControls={
-        <label className="panel-inline-toggle">
-          <input
-            type="checkbox"
-            checked={isSubscribed}
-            onChange={(event) => setIsSubscribed(event.target.checked)}
-          />
-          subscribed
-        </label>
-      }
-      description={
-        <pre className="query-tools-code-block">{`const { data, isFetching } = useQuery({
-  ...userProfileOptions({ queryKey }),
-  subscribed,
-  gcTime: 3000,
-})`}</pre>
-      }
-    >
-      <SubscribedPanelContent queryKey={queryKey} isSubscribed={isSubscribed} />
-    </QueryToolsWrapper>
+    <div ref={rerenderFlashRef} className="query-state-panel-wrapper">
+      <span className="query-state-panel-label">Rendered component</span>
+      <div className="query-state-panel">
+        <p>First Name: {data?.firstName ?? '(no data)'}</p>
+        <p>changingValue: {data?.changingValue ?? '(no data)'}</p>
+        <p>isFetching not tracked</p>
+      </div>
+    </div>
   )
 }
 
-function PanelWithNotifyOnChangePropsDropdown({ queryKey }: PanelQueryContentProps) {
+function PanelWithTrackedDataAndFetchingControls({ queryKey }: PanelQueryContentProps) {
   const [notifyMode, setNotifyMode] = useState<NotifyMode>('tracked')
 
   return (
     <QueryToolsWrapper
       queryKey={queryKey}
-      title="Panel B (notifyOnChangeProps + gcTime: 3000)"
+      title="Panel A ({ data, isFetching } tracked)"
       localControls={
         <label className="panel-inline-toggle">
           notifyOnChangeProps
@@ -153,25 +119,66 @@ function PanelWithNotifyOnChangePropsDropdown({ queryKey }: PanelQueryContentPro
         <pre className="query-tools-code-block">{`const { data, isFetching } = useQuery({
   ...userProfileOptions({ queryKey }),
   notifyOnChangeProps,
-  gcTime: 3000,
 })`}</pre>
       }
     >
-      <NotifyPanelContent queryKey={queryKey} notifyMode={notifyMode} />
+      <PanelWithTrackedDataAndFetching queryKey={queryKey} notifyMode={notifyMode} />
     </QueryToolsWrapper>
   )
 }
 
-export function SubscribedVsNotifyOnChangePropsExample() {
+function PanelWithTrackedDataOnlyControls({ queryKey }: PanelQueryContentProps) {
+  const [notifyMode, setNotifyMode] = useState<NotifyMode>('tracked')
+
+  return (
+    <QueryToolsWrapper
+      queryKey={queryKey}
+      title="Panel B ({ data } only tracked)"
+      localControls={
+        <label className="panel-inline-toggle">
+          notifyOnChangeProps
+          <select
+            value={notifyMode}
+            onChange={(event) => setNotifyMode(event.target.value as NotifyMode)}
+          >
+            {NOTIFY_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      }
+      description={
+        <pre className="query-tools-code-block">{`const { data } = useQuery({
+  ...userProfileOptions({ queryKey }),
+  notifyOnChangeProps,
+})`}</pre>
+      }
+    >
+      <PanelWithTrackedDataOnly queryKey={queryKey} notifyMode={notifyMode} />
+    </QueryToolsWrapper>
+  )
+}
+
+export function NotifyOnChangePropsTrackedValuesExample() {
   return (
     <AccordionSection
-      id="12_subscribed-vs-notify-on-change-props"
-      title="12 Subscribed vs notifyOnChangeProps"
-      description="Both panels use `const { data, isFetching } = useQuery(...)` and local gcTime: 3000, but each panel has a separate queryKey (separate cache). Panel A can fully unsubscribe with subscribed=false, so its cache can be garbage-collected quickly. Panel B stays subscribed and only changes rerender notifications via notifyOnChangeProps."
+      id="11_notify-on-change-props-tracked-values"
+      title="11 notifyOnChangeProps"
+      description={
+        <>
+          `notifyOnChangeProps` modifies the default tracked-values behavior. If a component tracks{' '}
+          <strong>isFetching</strong>, but `notifyOnChangeProps` is set to <strong>['data']</strong>, that
+          component will not receive <strong>isFetching</strong> updates. And the other way around: if a
+          component does not track <strong>isFetching</strong>, it can still receive those updates when you
+          include <strong>isFetching</strong> in `notifyOnChangeProps`.
+        </>
+      }
     >
       <PanelsRow>
-        <PanelWithSubscribedToggle queryKey={SUBSCRIBED_GC_QUERY_KEY} />
-        <PanelWithNotifyOnChangePropsDropdown queryKey={NOTIFY_GC_QUERY_KEY} />
+        <PanelWithTrackedDataAndFetchingControls queryKey={SHARED_NOTIFY_QUERY_KEY} />
+        <PanelWithTrackedDataOnlyControls queryKey={SHARED_NOTIFY_QUERY_KEY} />
       </PanelsRow>
     </AccordionSection>
   )

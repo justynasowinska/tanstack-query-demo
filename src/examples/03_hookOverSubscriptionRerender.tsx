@@ -52,7 +52,7 @@ function PanelDataAndIsFetchingFromHook({ queryKey }: PanelQueryContentProps) {
 export function HookOverSubscriptionRerenderExample() {
   return (
     <AccordionSection
-      id="05_hook-over-subscription-rerender"
+      id="03_hook-over-subscription-rerender"
       title="03 Hook Over-Subscription Rerender"
       description="Both panels call the same custom API hook that already subscribes to data + isFetching and returns { data, isFetching }. Because the subscription happens inside the hook, both panels rerender on isFetching transitions, even when the left panel reads only data from that returned object."
     >
