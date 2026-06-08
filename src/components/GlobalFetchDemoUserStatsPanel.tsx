@@ -2,18 +2,29 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
 import {
     getFetchDemoUserCallCount,
     getFetchDemoUserShouldFail,
+    getFetchDemoUserStableChangingValue,
+    getFetchDemoUserUseRandomChangingValue,
     getMockApiDelayMs,
     resetFetchDemoUserCallCount,
     setFetchDemoUserShouldFail,
+    setFetchDemoUserStableChangingValue,
+    setFetchDemoUserUseRandomChangingValue,
     setMockApiDelayMs,
     subscribeFetchDemoUserCallCount,
     subscribeFetchDemoUserShouldFail,
+    subscribeFetchDemoUserValueMode,
 } from '../api/mockApi'
 
 function parseDelayValue(value: string): number {
   const parsed = Number(value.trim())
 
   return Number.isFinite(parsed) && parsed >= 0 ? Math.floor(parsed) : 0
+}
+
+function parseStableChangingValue(value: string): number {
+  const parsed = Number(value.trim())
+
+  return Number.isFinite(parsed) ? Number(parsed.toFixed(5)) : 0.5
 }
 
 export function GlobalFetchDemoUserStatsPanel() {
@@ -25,11 +36,30 @@ export function GlobalFetchDemoUserStatsPanel() {
     subscribeFetchDemoUserShouldFail,
     getFetchDemoUserShouldFail,
   )
+  const fetchDemoUserUseRandomChangingValue = useSyncExternalStore(
+    subscribeFetchDemoUserValueMode,
+    getFetchDemoUserUseRandomChangingValue,
+  )
+  const fetchDemoUserStableChangingValue = useSyncExternalStore(
+    subscribeFetchDemoUserValueMode,
+    getFetchDemoUserStableChangingValue,
+  )
   const [delayInput, setDelayInput] = useState(String(getMockApiDelayMs()))
+  const [stableValueInput, setStableValueInput] = useState(
+    String(getFetchDemoUserStableChangingValue()),
+  )
 
   useEffect(() => {
     setMockApiDelayMs(parseDelayValue(delayInput))
   }, [delayInput])
+
+  useEffect(() => {
+    setFetchDemoUserStableChangingValue(parseStableChangingValue(stableValueInput))
+  }, [stableValueInput])
+
+  useEffect(() => {
+    setStableValueInput(String(fetchDemoUserStableChangingValue))
+  }, [fetchDemoUserStableChangingValue])
 
   return (
     <section className="global-fetch-stats" aria-label="mocked api function">
@@ -60,6 +90,36 @@ export function GlobalFetchDemoUserStatsPanel() {
               step={50}
               value={delayInput}
               onChange={(event) => setDelayInput(event.target.value)}
+            />
+          </label>
+
+          <label
+            className="global-fetch-stats-toggle"
+            htmlFor="fetch-demo-user-random-changing-value"
+          >
+            <input
+              id="fetch-demo-user-random-changing-value"
+              type="checkbox"
+              checked={fetchDemoUserUseRandomChangingValue}
+              onChange={(event) =>
+                setFetchDemoUserUseRandomChangingValue(event.target.checked)
+              }
+            />
+            Use Math.random()
+          </label>
+
+          <label
+            className="global-fetch-stats-delay-field"
+            htmlFor="fetch-demo-user-stable-changing-value"
+          >
+            Stable changingValue
+            <input
+              id="fetch-demo-user-stable-changing-value"
+              type="number"
+              step="0.00001"
+              value={stableValueInput}
+              onChange={(event) => setStableValueInput(event.target.value)}
+              disabled={fetchDemoUserUseRandomChangingValue}
             />
           </label>
 

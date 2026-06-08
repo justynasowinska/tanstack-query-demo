@@ -1,7 +1,5 @@
 .top-nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  position: static;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -264,6 +262,14 @@
   color: inherit;
 }
 
+.global-fetch-stats-delay-field input:disabled {
+  opacity: 0.65;
+  color: var(--text);
+  background: var(--social-bg);
+  border-color: color-mix(in oklab, var(--border) 70%, var(--text));
+  cursor: not-allowed;
+}
+
 .global-fetch-stats-title {
   margin: 0;
   font-weight: 700;
@@ -419,6 +425,8 @@
   flex-direction: column;
   gap: 14px;
   height: 100%;
+  min-width: 0;
+  overflow-x: auto;
 }
 
 .query-tools-header {
@@ -464,6 +472,7 @@
 .query-tools-layout {
   display: grid;
   gap: 14px;
+  min-width: 0;
 }
 
 .basic-query-guide {

@@ -10,10 +10,14 @@ export type DemoUser = {
 }
 
 const DEFAULT_MOCK_API_DELAY_MS = 2000
+const DEFAULT_FETCH_DEMO_USER_STABLE_VALUE = 0.5
 let fetchDemoUserCallCount = 0
 let fetchDemoUserShouldFail = false
+let fetchDemoUserUseRandomChangingValue = true
+let fetchDemoUserStableChangingValue = DEFAULT_FETCH_DEMO_USER_STABLE_VALUE
 const fetchDemoUserCallCountSubscribers = new Set<() => void>()
 const fetchDemoUserShouldFailSubscribers = new Set<() => void>()
+const fetchDemoUserValueModeSubscribers = new Set<() => void>()
 
 const wait = (delayMs: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, delayMs))
@@ -51,11 +55,39 @@ export function setFetchDemoUserShouldFail(value: boolean) {
   fetchDemoUserShouldFailSubscribers.forEach((notify) => notify())
 }
 
+export function getFetchDemoUserUseRandomChangingValue() {
+  return fetchDemoUserUseRandomChangingValue
+}
+
+export function setFetchDemoUserUseRandomChangingValue(value: boolean) {
+  fetchDemoUserUseRandomChangingValue = value
+  fetchDemoUserValueModeSubscribers.forEach((notify) => notify())
+}
+
+export function getFetchDemoUserStableChangingValue() {
+  return fetchDemoUserStableChangingValue
+}
+
+export function setFetchDemoUserStableChangingValue(value: number) {
+  fetchDemoUserStableChangingValue = Number.isFinite(value)
+    ? Number(value.toFixed(5))
+    : DEFAULT_FETCH_DEMO_USER_STABLE_VALUE
+  fetchDemoUserValueModeSubscribers.forEach((notify) => notify())
+}
+
 export function subscribeFetchDemoUserShouldFail(onStoreChange: () => void) {
   fetchDemoUserShouldFailSubscribers.add(onStoreChange)
 
   return () => {
     fetchDemoUserShouldFailSubscribers.delete(onStoreChange)
+  }
+}
+
+export function subscribeFetchDemoUserValueMode(onStoreChange: () => void) {
+  fetchDemoUserValueModeSubscribers.add(onStoreChange)
+
+  return () => {
+    fetchDemoUserValueModeSubscribers.delete(onStoreChange)
   }
 }
 
@@ -85,7 +117,9 @@ export async function fetchDemoUser(
   fetchDemoUserCallCount += 1
   fetchDemoUserCallCountSubscribers.forEach((notify) => notify())
 
-  const roundedChangingValue = Number(Math.random().toFixed(5))
+  const roundedChangingValue = fetchDemoUserUseRandomChangingValue
+    ? Number(Math.random().toFixed(5))
+    : fetchDemoUserStableChangingValue
 
   return mockApiRequest(
     () => ({
