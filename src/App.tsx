@@ -3,7 +3,7 @@ import './App.css'
 import { GlobalFetchDemoUserStatsPanel } from './components/GlobalFetchDemoUserStatsPanel'
 import { GlobalQueryOptionsToolbar } from './components/GlobalQueryOptionsToolbar'
 import { PageShell } from './components/PageShell'
-import { BasicUserQueryExample } from './examples/01_introduction'
+import { BasicUserQueryExample, HowToTestDemoGuide } from './examples/01_introduction'
 import { IsFetchingSubscriptionRerenderExample } from './examples/02_trackedValuesRerender'
 import { HookOverSubscriptionRerenderExample } from './examples/03_hookOverSubscriptionRerender'
 import { SharedCacheBetweenComponentsExample } from './examples/04_fullDataSubscription'
@@ -86,6 +86,7 @@ function App() {
       <PageShell>
         <GlobalQueryOptionsToolbar />
         <GlobalFetchDemoUserStatsPanel />
+        <HowToTestDemoGuide />
         <BasicUserQueryExample />
         <IsFetchingSubscriptionRerenderExample />
         <HookOverSubscriptionRerenderExample />

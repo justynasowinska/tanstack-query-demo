@@ -24,6 +24,65 @@ function UserProfileQueryContent({ queryKey }: UserProfileQueryContentProps) {
   )
 }
 
+export function HowToTestDemoGuide() {
+  return (
+    <AccordionSection
+      id="00_how-to-test-demo"
+      title="00 How to test this demo"
+      description={
+        <>
+          Quick walkthrough before examples: open DevTools, watch cache details,
+          and compare Refetch versus Remount behavior.
+        </>
+      }
+      defaultOpen
+    >
+      <div className="basic-query-guide-content">
+        <p>
+          If TanStack DevTools is hidden, open it with the palm tree icon in the
+          bottom-right corner. Select query cache entries and watch Query Details
+          while using Refetch and Remount.
+        </p>
+
+        <p>
+          When rendered components rerender, they briefly flash purple so you can
+          immediately see rerender moments.
+        </p>
+
+        <p>The function below is used to fetch data for the introduction demo query.</p>
+
+        <pre className="query-tools-code-block">{`export async function fetchDemoUser(options?: MockRequestOptions) {
+  return mockApiRequest(
+    () => ({
+      id: 1,
+      firstName: 'Demo',
+      changingValue: Math.random(),
+    }),
+    options,
+  )
+}`}</pre>
+
+        <p>
+          Requests include an artificial API delay to simulate backend response
+          time. You can change it in Mocked API function using the API delay
+          field.
+        </p>
+
+        <p>
+          In DevTools - Actions you can run operations on selected cache (for
+          example refetch, invalidate and more).
+        </p>
+
+        <p>
+          This project is open source, so after cloning from GitHub you can
+          freely experiment with code. Repository link is available in the
+          top-right corner.
+        </p>
+      </div>
+    </AccordionSection>
+  )
+}
+
 export function BasicUserQueryExample() {
   return (
     <AccordionSection
@@ -39,54 +98,6 @@ export function BasicUserQueryExample() {
         </>
       }
     >
-      <details className="basic-query-guide" open>
-        <summary className="basic-query-guide-summary">How to test this demo</summary>
-
-        <div className="basic-query-guide-content">
-          <p>
-            If TanStack DevTools is hidden, open it with the palm tree icon in the
-            bottom-right corner. Select this query cache entry and watch Query Details
-            while using Refetch and Remount.
-          </p>
-
-          <p>
-            When this component rerenders, it briefly flashes purple so you can
-            immediately see rerender moments.
-          </p>
-
-          <p>
-            The function below is the one used to fetch data for this demo query.
-          </p>
-
-          <pre className="query-tools-code-block">{`export async function fetchDemoUser(options?: MockRequestOptions) {
-  return mockApiRequest(
-    () => ({
-      id: 1,
-      firstName: 'Demo',
-      changingValue: Math.random(),
-    }),
-    options,
-  )
-}`}</pre>
-
-          <p>
-            Requests include an artificial API delay to simulate backend response time.
-            You can change it in Mocked API function using the API delay field.
-          </p>
-
-          <p>
-            In DevTools - Actions you can run operations on selected cache (for
-            example refetch, invalidate and more).
-          </p>
-
-          <p>
-            This project is open source, so after cloning from GitHub you can freely
-            experiment with code. Repository link is available in the top-right
-            corner.
-          </p>
-        </div>
-      </details>
-
       <QueryToolsWrapper
         queryKey={BASIC_INFORMATION_QUERY_KEY}
         description={
