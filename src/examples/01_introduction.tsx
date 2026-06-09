@@ -45,7 +45,7 @@ export function HowToTestDemoGuide() {
         </p>
 
         <p>
-          When rendered components rerender, they briefly flash purple so you can
+          When rendered components rerender, they briefly flash orange so you can
           immediately see rerender moments.
         </p>
 
