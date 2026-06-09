@@ -306,7 +306,6 @@
   background: var(--action-btn-bg);
   color: var(--action-btn-text);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 .global-fetch-stats-reset-button:hover {
@@ -317,7 +316,6 @@
 .global-fetch-stats-reset-button:active {
   background: var(--action-btn-active-bg);
   border-color: var(--action-btn-hover-border);
-  transform: scale(0.96);
 }
 
 @media (max-width: 740px) {
@@ -545,7 +543,6 @@
   background: var(--action-btn-bg);
   color: var(--action-btn-text);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 .query-toolbar button:hover {
@@ -556,7 +553,6 @@
 .query-toolbar button:active {
   background: var(--action-btn-active-bg);
   border-color: var(--action-btn-hover-border);
-  transform: scale(0.96);
 }
 
 .query-state-panel-wrapper {
