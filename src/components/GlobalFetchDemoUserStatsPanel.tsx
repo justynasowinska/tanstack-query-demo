@@ -1,18 +1,18 @@
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import {
-    getFetchDemoUserCallCount,
-    getFetchDemoUserShouldFail,
-    getFetchDemoUserStableChangingValue,
-    getFetchDemoUserUseRandomChangingValue,
-    getMockApiDelayMs,
-    resetFetchDemoUserCallCount,
-    setFetchDemoUserShouldFail,
-    setFetchDemoUserStableChangingValue,
-    setFetchDemoUserUseRandomChangingValue,
-    setMockApiDelayMs,
-    subscribeFetchDemoUserCallCount,
-    subscribeFetchDemoUserShouldFail,
-    subscribeFetchDemoUserValueMode,
+  getFetchDemoUserCallCount,
+  getFetchDemoUserShouldFail,
+  getFetchDemoUserStableChangingValue,
+  getFetchDemoUserUseRandomChangingValue,
+  getMockApiDelayMs,
+  resetFetchDemoUserCallCount,
+  setFetchDemoUserShouldFail,
+  setFetchDemoUserStableChangingValue,
+  setFetchDemoUserUseRandomChangingValue,
+  setMockApiDelayMs,
+  subscribeFetchDemoUserCallCount,
+  subscribeFetchDemoUserShouldFail,
+  subscribeFetchDemoUserValueMode,
 } from '../api/mockApi'
 
 function parseDelayValue(value: string): number {
@@ -40,26 +40,10 @@ export function GlobalFetchDemoUserStatsPanel() {
     subscribeFetchDemoUserValueMode,
     getFetchDemoUserUseRandomChangingValue,
   )
-  const fetchDemoUserStableChangingValue = useSyncExternalStore(
-    subscribeFetchDemoUserValueMode,
-    getFetchDemoUserStableChangingValue,
-  )
   const [delayInput, setDelayInput] = useState(String(getMockApiDelayMs()))
   const [stableValueInput, setStableValueInput] = useState(
     String(getFetchDemoUserStableChangingValue()),
   )
-
-  useEffect(() => {
-    setMockApiDelayMs(parseDelayValue(delayInput))
-  }, [delayInput])
-
-  useEffect(() => {
-    setFetchDemoUserStableChangingValue(parseStableChangingValue(stableValueInput))
-  }, [stableValueInput])
-
-  useEffect(() => {
-    setStableValueInput(String(fetchDemoUserStableChangingValue))
-  }, [fetchDemoUserStableChangingValue])
 
   return (
     <section className="global-fetch-stats" aria-label="mocked api function">
@@ -89,7 +73,11 @@ export function GlobalFetchDemoUserStatsPanel() {
               min={0}
               step={50}
               value={delayInput}
-              onChange={(event) => setDelayInput(event.target.value)}
+              onChange={(event) => {
+                const nextValue = event.target.value
+                setDelayInput(nextValue)
+                setMockApiDelayMs(parseDelayValue(nextValue))
+              }}
             />
           </label>
 
@@ -118,7 +106,11 @@ export function GlobalFetchDemoUserStatsPanel() {
               type="number"
               step="0.00001"
               value={stableValueInput}
-              onChange={(event) => setStableValueInput(event.target.value)}
+              onChange={(event) => {
+                const nextValue = event.target.value
+                setStableValueInput(nextValue)
+                setFetchDemoUserStableChangingValue(parseStableChangingValue(nextValue))
+              }}
               disabled={fetchDemoUserUseRandomChangingValue}
             />
           </label>
