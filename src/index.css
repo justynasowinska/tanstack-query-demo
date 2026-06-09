@@ -15,6 +15,12 @@
   --example-panel-bg: #1d3729;
   --example-panel-border: #4f9a6a;
   --social-bg: rgba(47, 48, 58, 0.4);
+  --action-btn-border: #6f98c9;
+  --action-btn-bg: #2d4667;
+  --action-btn-text: #e2edfb;
+  --action-btn-hover-bg: #3a5d87;
+  --action-btn-hover-border: #8ab0dd;
+  --action-btn-active-bg: #4872a4;
   --shadow:
     rgba(0, 0, 0, 0.35) 0 10px 15px -3px, rgba(0, 0, 0, 0.2) 0 4px 6px -2px;
 
@@ -54,6 +60,12 @@
   --example-panel-bg: #ebf8f0;
   --example-panel-border: #6fb387;
   --social-bg: rgba(15, 23, 42, 0.06);
+  --action-btn-border: #7ca6d8;
+  --action-btn-bg: #e4effd;
+  --action-btn-text: #13406f;
+  --action-btn-hover-bg: #d6e6fc;
+  --action-btn-hover-border: #6698cf;
+  --action-btn-active-bg: #bfd7f8;
   --shadow:
     rgba(15, 23, 42, 0.1) 0 10px 15px -3px, rgba(15, 23, 42, 0.05) 0 4px 6px -2px;
   color-scheme: light;
