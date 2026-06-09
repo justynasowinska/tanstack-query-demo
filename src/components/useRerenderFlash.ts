@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 
 export function useRerenderFlash<T extends HTMLElement>() {
   const elementRef = useRef<T | null>(null)
-  const firstRenderRef = useRef(true)
 
   useEffect(() => {
     const element = elementRef.current
@@ -11,12 +10,7 @@ export function useRerenderFlash<T extends HTMLElement>() {
       return
     }
 
-    if (firstRenderRef.current) {
-      firstRenderRef.current = false
-      return
-    }
-
-    // Restart animation on every update commit.
+    // Restart animation on every render commit, including after remount.
     element.classList.remove('re-render-flash')
     void element.offsetWidth
     element.classList.add('re-render-flash')
