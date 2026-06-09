@@ -15,9 +15,6 @@ type PanelQueryContentProps = {
 function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
   const {
     data,
-    isFetching,
-    isPending,
-    isLoading,
   } = useQuery({
     ...userProfileOptions({ queryKey }),
     enabled: false,
@@ -29,9 +26,6 @@ function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName ?? '(no data yet)'}</p>
-        <p>isFetching: {String(isFetching)}</p>
-        <p>isPending: {String(isPending)}</p>
-        <p>isLoading: {String(isLoading)}</p>
       </div>
     </div>
   )
@@ -40,9 +34,6 @@ function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
 function PanelEnabledTrueDefault({ queryKey }: PanelQueryContentProps) {
   const {
     data,
-    isFetching,
-    isPending,
-    isLoading,
   } = useQuery({
     ...userProfileOptions({ queryKey }),
     enabled: true,
@@ -54,9 +45,6 @@ function PanelEnabledTrueDefault({ queryKey }: PanelQueryContentProps) {
       <span className="query-state-panel-label">Rendered component</span>
       <div className="query-state-panel">
         <p>First Name: {data?.firstName ?? '(loading...)'}</p>
-        <p>isFetching: {String(isFetching)}</p>
-        <p>isPending: {String(isPending)}</p>
-        <p>isLoading: {String(isLoading)}</p>
       </div>
     </div>
   )
@@ -134,9 +122,6 @@ const onRefetchData = () => {
           description={
             <pre className="query-tools-code-block">{`const {
   data,
-  isFetching,
-  isPending,
-  isLoading,
 } = useQuery({
   ...userProfileOptions({ queryKey }),
   enabled: false,
@@ -152,9 +137,6 @@ const onRefetchData = () => {
           description={
             <pre className="query-tools-code-block">{`const {
   data,
-  isFetching,
-  isPending,
-  isLoading,
 } = useQuery({
   ...userProfileOptions({ queryKey }),
   enabled: true, // default
