@@ -1,13 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 
-const DEFAULT_STALE_TIME = 0
-const DEFAULT_GC_TIME = 5 * 60 * 1000
-const DEFAULT_RETRY = 3
+const DEFAULT_STALE_TIME = Infinity
+const DEFAULT_GC_TIME = Infinity
+const DEFAULT_RETRY = 0
 
 type TimeOptionMode = 'custom' | 'infinity'
 
-function toTimeMode(value: unknown): TimeOptionMode {
+function toTimeMode(value: unknown, isDefaultInfinity: boolean = false): TimeOptionMode {
   if (value === Infinity) {
     return 'infinity'
   }
@@ -16,12 +16,24 @@ function toTimeMode(value: unknown): TimeOptionMode {
     return 'infinity'
   }
 
+  if (value === undefined && isDefaultInfinity) {
+    return 'infinity'
+  }
+
   return 'custom'
 }
 
-function toTimeInputValue(value: unknown, fallback: number): string {
+function toTimeInputValue(value: unknown, fallback: number | typeof Infinity): string {
+  if (value === Infinity) {
+    return '0'
+  }
+
   if (typeof value === 'number' && Number.isFinite(value) && value >= 0) {
     return String(Math.floor(value))
+  }
+
+  if (fallback === Infinity) {
+    return '0'
   }
 
   return String(fallback)
@@ -54,9 +66,9 @@ export function GlobalQueryOptionsToolbar() {
     const queryDefaults = queryClient.getDefaultOptions().queries
 
     return {
-      staleTimeMode: toTimeMode(queryDefaults?.staleTime),
+      staleTimeMode: toTimeMode(queryDefaults?.staleTime, DEFAULT_STALE_TIME === Infinity),
       staleTimeInput: toTimeInputValue(queryDefaults?.staleTime, DEFAULT_STALE_TIME),
-      gcTimeMode: toTimeMode(queryDefaults?.gcTime),
+      gcTimeMode: toTimeMode(queryDefaults?.gcTime, DEFAULT_GC_TIME === Infinity),
       gcTimeInput: toTimeInputValue(queryDefaults?.gcTime, DEFAULT_GC_TIME),
       retry: toRetryInputValue(queryDefaults?.retry, DEFAULT_RETRY),
     }
