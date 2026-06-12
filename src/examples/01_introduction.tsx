@@ -35,7 +35,6 @@ export function HowToTestDemoGuide() {
           and compare Refetch versus Remount behavior.
         </>
       }
-      defaultOpen
     >
       <div className="basic-query-guide-content">
         <p>
