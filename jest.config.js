@@ -10,6 +10,7 @@ export default {
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
+    '!src/App.tsx',
     '!src/main.tsx',
     '!src/bootstrapApp.tsx',
   ],
@@ -17,8 +18,10 @@ export default {
   transform: {
     '^.+\\.tsx?$': ['ts-jest', {
       tsconfig: {
+        lib: ['ES2023', 'DOM'],
         jsx: 'react-jsx',
         esModuleInterop: true,
+        types: ['jest', '@testing-library/jest-dom', 'node'],
       },
     }],
   },
