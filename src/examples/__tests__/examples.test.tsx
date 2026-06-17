@@ -3,8 +3,8 @@ import { screen } from '@testing-library/dom'
 import { render } from '@testing-library/react'
 import type { ReactElement } from 'react'
 import {
-  BasicUserQueryExample,
-  HowToTestDemoGuide,
+    BasicUserQueryExample,
+    HowToTestDemoGuide,
 } from '../01_introduction'
 import { IsFetchingSubscriptionRerenderExample } from '../02_trackedValuesRerender'
 import { HookOverSubscriptionRerenderExample } from '../03_hookOverSubscriptionRerender'
@@ -20,6 +20,7 @@ import { NotifyOnChangePropsTrackedValuesExample } from '../12_notifyOnChangePro
 import { SubscribedVsNotifyOnChangePropsExample } from '../13_subscribedVsNotifyOnChangeProps'
 import { SelectorFunctionReferenceExample } from '../14_selectorFunctionReference'
 import { SelectorReturningFunctionExample } from '../15_selectorReturningFunction'
+import { QueryFlagsStatesExample } from '../16_isFetchingIsPendingIsLoading'
 
 function renderExample(example: ReactElement) {
   const queryClient = new QueryClient({
@@ -98,6 +99,11 @@ describe('examples', () => {
       'SelectorReturningFunctionExample',
       <SelectorReturningFunctionExample />,
       '15 Selector Returning a Function',
+    ],
+    [
+      'QueryFlagsStatesExample',
+      <QueryFlagsStatesExample />,
+      '16 isFetching vs isPending vs isLoading',
     ],
   ])('renders %s', (_name, example, expectedTitle) => {
     renderExample(example as ReactElement)

@@ -34,7 +34,11 @@ export function QueryToolsWrapper({
       return
     }
 
-    void queryClient.refetchQueries({ queryKey })
+    // Find query directly and execute refetch, works even with enabled: false
+    const query = queryClient.getQueryCache().find({ queryKey })
+    if (query) {
+      void query.fetch()
+    }
   }
 
   const handleRemount = () => {

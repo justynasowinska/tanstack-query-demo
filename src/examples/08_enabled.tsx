@@ -1,4 +1,5 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import type { DemoUser } from '../api/mockApi'
 import { AccordionSection } from '../components/AccordionSection'
 import { PanelsRow } from '../components/PanelsRow'
 import { QueryToolsWrapper } from '../components/QueryToolsWrapper'
@@ -8,17 +9,11 @@ import { userProfileOptions } from '../hooks/useUserProfile'
 const ENABLED_FALSE_QUERY_KEY = ['08-enabled-false']
 const ENABLED_TRUE_DEFAULT_QUERY_KEY = ['08-enabled-true']
 
-type PanelQueryContentProps = {
-  queryKey: string[]
+type PanelProps = {
+  data: DemoUser | undefined
 }
 
-function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
-  const {
-    data,
-  } = useQuery({
-    ...userProfileOptions({ queryKey }),
-    enabled: false,
-  })
+function PanelEnabledFalse({ data }: PanelProps) {
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -31,13 +26,7 @@ function PanelEnabledFalse({ queryKey }: PanelQueryContentProps) {
   )
 }
 
-function PanelEnabledTrueDefault({ queryKey }: PanelQueryContentProps) {
-  const {
-    data,
-  } = useQuery({
-    ...userProfileOptions({ queryKey }),
-    enabled: true,
-  })
+function PanelEnabledTrueDefault({ data }: PanelProps) {
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
   return (
@@ -51,15 +40,15 @@ function PanelEnabledTrueDefault({ queryKey }: PanelQueryContentProps) {
 }
 
 export function EnabledExample() {
-  const queryClient = useQueryClient()
+  const { data: dataFalse } = useQuery({
+    ...userProfileOptions({ queryKey: ENABLED_FALSE_QUERY_KEY }),
+    enabled: false,
+  })
 
-  const handleEnabledFalseRefetch = () => {
-    void queryClient.fetchQuery(
-      userProfileOptions({
-        queryKey: ENABLED_FALSE_QUERY_KEY,
-      })
-    )
-  }
+  const { data: dataTrue } = useQuery({
+    ...userProfileOptions({ queryKey: ENABLED_TRUE_DEFAULT_QUERY_KEY }),
+    enabled: true,
+  })
 
   return (
     <AccordionSection
@@ -118,7 +107,6 @@ const onRefetchData = () => {
         <QueryToolsWrapper
           queryKey={ENABLED_FALSE_QUERY_KEY}
           title="Panel A (enabled: false)"
-          onRefetch={handleEnabledFalseRefetch}
           description={
             <pre className="query-tools-code-block">{`const {
   data,
@@ -128,7 +116,7 @@ const onRefetchData = () => {
 })`}</pre>
           }
         >
-          <PanelEnabledFalse queryKey={ENABLED_FALSE_QUERY_KEY} />
+          <PanelEnabledFalse data={dataFalse} />
         </QueryToolsWrapper>
 
         <QueryToolsWrapper
@@ -143,7 +131,7 @@ const onRefetchData = () => {
 })`}</pre>
           }
         >
-          <PanelEnabledTrueDefault queryKey={ENABLED_TRUE_DEFAULT_QUERY_KEY} />
+          <PanelEnabledTrueDefault data={dataTrue} />
         </QueryToolsWrapper>
       </PanelsRow>
     </AccordionSection>

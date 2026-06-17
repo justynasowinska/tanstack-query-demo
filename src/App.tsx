@@ -18,6 +18,7 @@ import { NotifyOnChangePropsTrackedValuesExample } from './examples/12_notifyOnC
 import { SubscribedVsNotifyOnChangePropsExample } from './examples/13_subscribedVsNotifyOnChangeProps'
 import { SelectorFunctionReferenceExample } from './examples/14_selectorFunctionReference'
 import { SelectorReturningFunctionExample } from './examples/15_selectorReturningFunction'
+import { QueryFlagsStatesExample } from './examples/16_isFetchingIsPendingIsLoading'
 
 type Theme = 'dark' | 'light'
 
@@ -102,6 +103,7 @@ function App() {
         <SubscribedVsNotifyOnChangePropsExample />
         <SelectorFunctionReferenceExample />
         <SelectorReturningFunctionExample />
+        <QueryFlagsStatesExample />
       </PageShell>
     </>
   )
