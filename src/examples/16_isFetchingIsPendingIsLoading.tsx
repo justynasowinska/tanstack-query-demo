@@ -44,7 +44,7 @@ export function QueryFlagsStatesExample() {
   const [enabled, setEnabled] = useState(true)
   const [subscribed, setSubscribed] = useState(true)
 
-  const { data, error, isFetching, isPending, isLoading } = useQuery({
+  const { data, error, isFetching, isPending, isLoading, refetch } = useQuery({
     ...userProfileOptions({ queryKey: QUERY_FLAGS_QUERY_KEY }),
     enabled,
     subscribed,
@@ -67,6 +67,7 @@ export function QueryFlagsStatesExample() {
       <QueryToolsWrapper
         queryKey={QUERY_FLAGS_QUERY_KEY}
         title="Single panel"
+        onRefetch={refetch}
         localControls={
           <>
             <label className="panel-inline-toggle">

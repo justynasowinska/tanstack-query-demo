@@ -40,7 +40,7 @@ function PanelEnabledTrueDefault({ data }: PanelProps) {
 }
 
 export function EnabledExample() {
-  const { data: dataFalse } = useQuery({
+  const { data: dataFalse, refetch } = useQuery({
     ...userProfileOptions({ queryKey: ENABLED_FALSE_QUERY_KEY }),
     enabled: false,
   })
@@ -107,6 +107,7 @@ const onRefetchData = () => {
         <QueryToolsWrapper
           queryKey={ENABLED_FALSE_QUERY_KEY}
           title="Panel A (enabled: false)"
+          onRefetch={refetch}
           description={
             <pre className="query-tools-code-block">{`const {
   data,
