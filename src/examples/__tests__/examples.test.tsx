@@ -21,6 +21,7 @@ import { SubscribedVsNotifyOnChangePropsExample } from '../13_subscribedVsNotify
 import { SelectorFunctionReferenceExample } from '../14_selectorFunctionReference'
 import { SelectorReturningFunctionExample } from '../15_selectorReturningFunction'
 import { QueryFlagsStatesExample } from '../16_isFetchingIsPendingIsLoading'
+import { AllUseQueryPropertiesExample } from '../17_allUseQueryProperties'
 
 function renderExample(example: ReactElement) {
   const queryClient = new QueryClient({
@@ -104,6 +105,11 @@ describe('examples', () => {
       'QueryFlagsStatesExample',
       <QueryFlagsStatesExample />,
       '16 isFetching vs isPending vs isLoading',
+    ],
+    [
+      'AllUseQueryPropertiesExample',
+      <AllUseQueryPropertiesExample />,
+      '17 All useQuery Result Properties',
     ],
   ])('renders %s', (_name, example, expectedTitle) => {
     renderExample(example as ReactElement)

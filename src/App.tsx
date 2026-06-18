@@ -19,6 +19,7 @@ import { SubscribedVsNotifyOnChangePropsExample } from './examples/13_subscribed
 import { SelectorFunctionReferenceExample } from './examples/14_selectorFunctionReference'
 import { SelectorReturningFunctionExample } from './examples/15_selectorReturningFunction'
 import { QueryFlagsStatesExample } from './examples/16_isFetchingIsPendingIsLoading'
+import { AllUseQueryPropertiesExample } from './examples/17_allUseQueryProperties'
 
 type Theme = 'dark' | 'light'
 
@@ -104,6 +105,7 @@ function App() {
         <SelectorFunctionReferenceExample />
         <SelectorReturningFunctionExample />
         <QueryFlagsStatesExample />
+        <AllUseQueryPropertiesExample />
       </PageShell>
     </>
   )
