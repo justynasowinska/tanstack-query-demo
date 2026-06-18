@@ -40,7 +40,7 @@ function QueryFlagsPanel({
   )
 }
 
-export function QueryFlagsStatesExample() {
+function QueryFlagsPanelContainer() {
   const [enabled, setEnabled] = useState(true)
   const [subscribed, setSubscribed] = useState(true)
 
@@ -50,6 +50,52 @@ export function QueryFlagsStatesExample() {
     subscribed,
   })
 
+  return (
+    <QueryToolsWrapper
+      queryKey={QUERY_FLAGS_QUERY_KEY}
+      title="Single panel"
+      onRefetch={refetch}
+      localControls={
+        <>
+          <label className="panel-inline-toggle">
+            <input
+              type="checkbox"
+              checked={enabled}
+              onChange={(event) => setEnabled(event.target.checked)}
+            />
+            enabled
+          </label>
+
+          <label className="panel-inline-toggle">
+            <input
+              type="checkbox"
+              checked={subscribed}
+              onChange={(event) => setSubscribed(event.target.checked)}
+            />
+            subscribed
+          </label>
+        </>
+      }
+      description={
+        <pre className="query-tools-code-block">{`const { isPending, isLoading, isFetching } = useQuery({
+  ...userProfileOptions({ queryKey }),
+  enabled,
+  subscribed,
+})`}</pre>
+      }
+    >
+      <QueryFlagsPanel
+        data={data}
+        error={error}
+        isFetching={isFetching}
+        isPending={isPending}
+        isLoading={isLoading}
+      />
+    </QueryToolsWrapper>
+  )
+}
+
+export function QueryFlagsStatesExample() {
   return (
     <AccordionSection
       id="16_query-flags"
@@ -64,47 +110,7 @@ export function QueryFlagsStatesExample() {
         </>
       }
     >
-      <QueryToolsWrapper
-        queryKey={QUERY_FLAGS_QUERY_KEY}
-        title="Single panel"
-        onRefetch={refetch}
-        localControls={
-          <>
-            <label className="panel-inline-toggle">
-              <input
-                type="checkbox"
-                checked={enabled}
-                onChange={(event) => setEnabled(event.target.checked)}
-              />
-              enabled
-            </label>
-
-            <label className="panel-inline-toggle">
-              <input
-                type="checkbox"
-                checked={subscribed}
-                onChange={(event) => setSubscribed(event.target.checked)}
-              />
-              subscribed
-            </label>
-          </>
-        }
-        description={
-          <pre className="query-tools-code-block">{`const { isPending, isLoading, isFetching } = useQuery({
-  ...userProfileOptions({ queryKey }),
-  enabled,
-  subscribed,
-})`}</pre>
-        }
-      >
-        <QueryFlagsPanel
-          data={data}
-          error={error}
-          isFetching={isFetching}
-          isPending={isPending}
-          isLoading={isLoading}
-        />
-      </QueryToolsWrapper>
+      <QueryFlagsPanelContainer />
     </AccordionSection>
   )
 }

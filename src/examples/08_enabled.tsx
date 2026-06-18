@@ -13,6 +13,10 @@ type PanelProps = {
   data: DemoUser | undefined
 }
 
+type PanelContainerProps = {
+  queryKey: string[]
+}
+
 function PanelEnabledFalse({ data }: PanelProps) {
   const rerenderFlashRef = useRerenderFlash<HTMLDivElement>()
 
@@ -39,17 +43,56 @@ function PanelEnabledTrueDefault({ data }: PanelProps) {
   )
 }
 
-export function EnabledExample() {
-  const { data: dataFalse, refetch } = useQuery({
-    ...userProfileOptions({ queryKey: ENABLED_FALSE_QUERY_KEY }),
+function PanelEnabledFalseContainer({ queryKey }: PanelContainerProps) {
+  const { data, refetch } = useQuery({
+    ...userProfileOptions({ queryKey }),
     enabled: false,
   })
 
-  const { data: dataTrue } = useQuery({
-    ...userProfileOptions({ queryKey: ENABLED_TRUE_DEFAULT_QUERY_KEY }),
+  return (
+    <QueryToolsWrapper
+      queryKey={queryKey}
+      title="Panel A (enabled: false)"
+      onRefetch={refetch}
+      description={
+        <pre className="query-tools-code-block">{`const {
+  data,
+} = useQuery({
+  ...userProfileOptions({ queryKey }),
+  enabled: false,
+})`}</pre>
+      }
+    >
+      <PanelEnabledFalse data={data} />
+    </QueryToolsWrapper>
+  )
+}
+
+function PanelEnabledTrueDefaultContainer({ queryKey }: PanelContainerProps) {
+  const { data } = useQuery({
+    ...userProfileOptions({ queryKey }),
     enabled: true,
   })
 
+  return (
+    <QueryToolsWrapper
+      queryKey={queryKey}
+      title="Panel B (enabled: true default)"
+      description={
+        <pre className="query-tools-code-block">{`const {
+  data,
+} = useQuery({
+  ...userProfileOptions({ queryKey }),
+  enabled: true, // default
+})`}</pre>
+      }
+    >
+      <PanelEnabledTrueDefault data={data} />
+    </QueryToolsWrapper>
+  )
+}
+
+export function EnabledExample() {
   return (
     <AccordionSection
       id="08_enabled"
@@ -104,36 +147,8 @@ const onRefetchData = () => {
       </details>
 
       <PanelsRow>
-        <QueryToolsWrapper
-          queryKey={ENABLED_FALSE_QUERY_KEY}
-          title="Panel A (enabled: false)"
-          onRefetch={refetch}
-          description={
-            <pre className="query-tools-code-block">{`const {
-  data,
-} = useQuery({
-  ...userProfileOptions({ queryKey }),
-  enabled: false,
-})`}</pre>
-          }
-        >
-          <PanelEnabledFalse data={dataFalse} />
-        </QueryToolsWrapper>
-
-        <QueryToolsWrapper
-          queryKey={ENABLED_TRUE_DEFAULT_QUERY_KEY}
-          title="Panel B (enabled: true default)"
-          description={
-            <pre className="query-tools-code-block">{`const {
-  data,
-} = useQuery({
-  ...userProfileOptions({ queryKey }),
-  enabled: true, // default
-})`}</pre>
-          }
-        >
-          <PanelEnabledTrueDefault data={dataTrue} />
-        </QueryToolsWrapper>
+        <PanelEnabledFalseContainer queryKey={ENABLED_FALSE_QUERY_KEY} />
+        <PanelEnabledTrueDefaultContainer queryKey={ENABLED_TRUE_DEFAULT_QUERY_KEY} />
       </PanelsRow>
     </AccordionSection>
   )
